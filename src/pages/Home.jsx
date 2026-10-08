@@ -29,24 +29,16 @@ export function Home() {
   return (
     <main>
       <section className="cover" aria-label="SX Architecture">
-        <RippleField className="cover-water" />
+        <RippleField className="cover-water" lens />
         <div className="cover-center">
-          <span className="tick tick-tl" aria-hidden="true" />
-          <span className="tick tick-tr" aria-hidden="true" />
-          <span className="tick tick-bl" aria-hidden="true" />
-          <span className="tick tick-br" aria-hidden="true" />
           <h1 className="wordmark">
             <span>SX</span> <span>Architecture</span>
           </h1>
           <span className="cover-rule" aria-hidden="true" />
-          <p className="cover-line">
-            <span>{site.name}</span>
-            <span>{site.role}</span>
-            <span>{site.location}</span>
-          </p>
+          <p className="cover-place">{site.location}</p>
         </div>
         <div className="cover-foot page-pad">
-          <span>{site.location} <Clock /></span>
+          <span>Local time <Clock /></span>
           <a className="cover-scroll" href="#featured">
             Scroll
             <span aria-hidden="true" />

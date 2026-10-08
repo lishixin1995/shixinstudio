@@ -219,6 +219,16 @@ img {
   animation-delay: 0.32s;
 }
 
+/* Project pages use a plain fade instead. */
+.fade-media {
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.fade.is-in .fade-media {
+  opacity: 1;
+}
+
 @keyframes ripple-open {
   from {
     clip-path: circle(0% at var(--x) var(--y));
@@ -244,7 +254,7 @@ img {
     opacity: 0.55;
   }
   100% {
-    width: 135%;
+    width: var(--ring-reach, 135%);
     opacity: 0;
   }
 }

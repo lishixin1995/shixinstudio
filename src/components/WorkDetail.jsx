@@ -5,7 +5,7 @@ export const pad = (number) => String(number).padStart(2, '0')
 
 // One project page; AI Lab entries use the same layout. Kept quiet: a title,
 // the cover, a short text with the facts beside it, then each drawing on its
-// own with plenty of air, rippling in as it comes into view.
+// own with plenty of air, fading in as it comes into view.
 export function WorkDetail({ item, list, base, backLabel }) {
   usePageTitle(item.title)
   const index = list.indexOf(item)
@@ -24,7 +24,7 @@ export function WorkDetail({ item, list, base, backLabel }) {
       </section>
 
       <div className="work-cover page-pad">
-        <RippleImage image={item.cover} fit="natural" play="now" origin={['50%', '62%']} eager />
+        <RippleImage image={item.cover} fit="natural" play="now" effect="fade" eager />
       </div>
 
       <section className="work-about page-pad">
@@ -48,7 +48,7 @@ export function WorkDetail({ item, list, base, backLabel }) {
       <section className="work-gallery page-pad" aria-label="Drawings and images">
         {item.images.map((image) => (
           <figure key={image.src} className={`work-figure size-${image.size}`}>
-            <RippleImage image={image} fit="natural" />
+            <RippleImage image={image} fit="natural" effect="fade" />
             <figcaption>{image.caption}</figcaption>
           </figure>
         ))}
