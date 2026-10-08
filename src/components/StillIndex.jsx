@@ -20,13 +20,18 @@ export function useMedia(query) {
 // name, and a red hairline led by a dot draws under the name. Arrow keys
 // browse and Enter opens. Items with status 'soon' are listed but not linked.
 // filters: category names to filter by (optional); intro: a line under the heading.
+const live = (item) => item.status !== 'soon'
+const pick = (items, filter) => (filter === 'All' ? items : items.filter((item) => item.category === filter))
+// The preview opens on the first item that has a page.
+const firstLive = (list) => Math.max(0, list.findIndex(live))
+
 export function StillIndex({ heading, intro, items, base, filters }) {
   const { navigate } = useRouter()
   const [filter, setFilter] = useState('All')
-  const list = useMemo(() => (filter === 'All' ? items : items.filter((item) => item.category === filter)), [filter, items])
+  const list = useMemo(() => pick(items, filter), [filter, items])
   // index: the item showing; previous: the one it ripples over; drop: counts
   // ripples so each new one remounts; y: where on the preview's edge it lands.
-  const [shown, setShown] = useState({ index: 0, previous: -1, drop: 0, y: '50%' })
+  const [shown, setShown] = useState(() => ({ index: firstLive(items), previous: -1, drop: 0, y: '50%' }))
   const rows = useRef([])
   const preview = useRef(null)
   const latest = useRef({})
@@ -34,7 +39,6 @@ export function StillIndex({ heading, intro, items, base, filters }) {
 
   const current = list[Math.min(shown.index, list.length - 1)]
   const below = shown.previous >= 0 ? list[shown.previous] : null
-  const live = (item) => item.status !== 'soon'
 
   // The drop lands on the preview's near edge, level with the name.
   const landing = (index) => {
@@ -51,7 +55,7 @@ export function StillIndex({ heading, intro, items, base, filters }) {
 
   const pickFilter = (name) => {
     setFilter(name)
-    setShown((state) => ({ index: 0, previous: -1, drop: state.drop + 1, y: '50%' }))
+    setShown((state) => ({ index: firstLive(pick(items, name)), previous: -1, drop: state.drop + 1, y: '50%' }))
   }
 
   const open = (item) => live(item) && navigate(`${base}/${item.slug}`)

@@ -9,6 +9,14 @@ export const aiLabIntro =
 
 export const aiEntries = [
   {
+    slug: 'ai-design-workflow',
+    status: 'soon',
+    title: 'AI-Assisted Design Workflow',
+    category: 'Workflow',
+    subtitle: 'From reference to render',
+    text: ['Coming soon.']
+  },
+  {
     slug: 'render-exploration',
     title: 'Render Exploration',
     category: 'AI Render',
@@ -36,19 +44,11 @@ export const aiEntries = [
     ]
   },
   {
-    slug: 'ai-design-workflow',
+    slug: 'tools-and-experiments',
     status: 'soon',
-    title: 'AI-Assisted Design Workflow',
-    category: 'Workflow',
-    subtitle: 'From reference to render',
-    text: ['Coming soon.']
-  },
-  {
-    slug: 'digital-tools',
-    status: 'soon',
-    title: 'Digital Tools',
+    title: 'Tools & Experiments',
     category: 'Tools',
-    subtitle: 'Tools built for everyday practice',
+    subtitle: 'Everyday digital tools and open AI experiments',
     text: ['Coming soon.']
   }
 ]
