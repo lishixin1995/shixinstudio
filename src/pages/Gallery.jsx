@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Frame } from '../components/Frame.jsx'
-import { RippleImage } from '../components/Ripple.jsx'
+import { Story } from '../components/Story.jsx'
 import { pad } from '../components/WorkDetail.jsx'
 import { gallery } from '../data/gallery.js'
 import { usePageTitle } from '../router.jsx'
@@ -10,6 +10,7 @@ const RATIOS = ['4 / 5', '1 / 1', '16 / 10', '3 / 4', '4 / 3', '1 / 1']
 export function Gallery() {
   usePageTitle('Gallery')
   const [open, setOpen] = useState(-1)
+  const blocks = gallery.map((image, index) => ({ src: image.src, label: image.caption, size: 'half', ratio: RATIOS[index % RATIOS.length], index }))
 
   useEffect(() => {
     if (open < 0) return undefined
@@ -33,12 +34,9 @@ export function Gallery() {
         <h1 className="page-title">Fragments, renders and studies.</h1>
       </section>
 
-      <section className="gallery-grid page-pad" aria-label="Gallery">
-        {gallery.map((image, index) => (
-          <button key={image.src} type="button" className="gallery-item" onClick={() => setOpen(index)} aria-label={`Open ${image.caption}`}>
-            <RippleImage image={image} ratio={RATIOS[index % RATIOS.length]} />
-          </button>
-        ))}
+      {/* Staggered pairs with plenty of air, like the project pages; each opens full screen. */}
+      <section className="gallery-story page-pad" aria-label="Gallery">
+        <Story blocks={blocks} effect="ripple" onOpen={(image) => setOpen(image.index)} />
       </section>
 
       {open >= 0 ? (

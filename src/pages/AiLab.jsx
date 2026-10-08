@@ -1,10 +1,15 @@
 import { RippleImage } from '../components/Ripple.jsx'
+import { StillIndex, useMedia } from '../components/StillIndex.jsx'
 import { pad } from '../components/WorkDetail.jsx'
 import { aiEntries, aiLabIntro } from '../data/aiLab.js'
 import { Link, usePageTitle } from '../router.jsx'
 
+// Computers get the same quiet list and rippling preview as Projects;
+// phones keep a simple column of entries.
 export function AiLab() {
   usePageTitle('AI Lab')
+  const compact = useMedia('(max-width: 760px)')
+  if (!compact) return <StillIndex heading="AI Lab" intro={aiLabIntro} items={aiEntries} base="/ai-lab" />
   return (
     <main className="page">
       <section className="page-head page-pad">

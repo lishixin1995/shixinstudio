@@ -7,8 +7,8 @@ import { projects } from '../src/data/projects.js'
 import { portrait } from '../src/data/site.js'
 
 const sections = [
-  ...projects.map((project) => ({ title: `Project — ${project.title}`, images: [project.cover, ...project.images] })),
-  ...aiEntries.filter((entry) => entry.status !== 'soon').map((entry) => ({ title: `AI Lab — ${entry.title}`, images: [entry.cover, ...entry.images] })),
+  ...projects.map((project) => ({ title: `Project — ${project.title}`, images: [project.cover, ...project.images.filter((block) => block.src)] })),
+  ...aiEntries.filter((entry) => entry.status !== 'soon').map((entry) => ({ title: `AI Lab — ${entry.title}`, images: [entry.cover, ...entry.images.filter((block) => block.src)] })),
   { title: 'About', images: [{ src: portrait, caption: 'Portrait' }] },
   { title: 'Gallery', images: gallery }
 ]

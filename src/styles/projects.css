@@ -10,8 +10,17 @@
 
 .still-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: clamp(28px, 4vw, 64px);
+  gap: 14px clamp(28px, 4vw, 64px);
+}
+
+.still-intro {
+  flex: 1 1 100%;
+  max-width: 56ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-3);
 }
 
 .still-title {
@@ -83,7 +92,7 @@
 
 .still-row {
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-columns: 46px auto auto;
   align-items: baseline;
   padding-block: 6px;
   color: var(--ink-4);
@@ -150,6 +159,23 @@
 .still-row.is-active .still-name::before {
   left: 100%;
   opacity: 1;
+}
+
+.still-row.is-soon {
+  cursor: default;
+}
+
+.still-soon {
+  margin-left: 14px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.still-stage.is-soon {
+  cursor: default;
 }
 
 .still-count {

@@ -31,7 +31,6 @@
    then each drawing on its own with plenty of air. */
 .work-intro,
 .work-about,
-.work-gallery,
 .work-end {
   max-width: 1320px;
   margin-inline: auto;
@@ -125,23 +124,97 @@
   font-size: 14.5px;
 }
 
-.work-gallery {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(96px, 17vh, 210px) clamp(24px, 4vw, 72px);
-  align-items: start;
+/* The story: one idea per row, rows alternating sides, lots of air. */
+.work-story {
+  max-width: 1320px;
+  margin-inline: auto;
 }
 
-.work-figure.size-full { grid-column: 1 / -1; }
-.work-figure.size-two-thirds { grid-column: 3 / span 8; }
-.work-figure.size-half { grid-column: span 6; }
-.work-figure.size-third { grid-column: span 4; }
+.story {
+  display: grid;
+  gap: clamp(120px, 22vh, 280px);
+}
 
-.work-figure figcaption {
+.story-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+  align-items: start;
+  margin: 0;
+}
+
+.story-media {
+  min-width: 0;
+}
+
+.story-caption {
+  display: grid;
+  gap: 8px;
   margin-top: 16px;
   font-size: 13px;
   line-height: 1.5;
   color: var(--ink-3);
+}
+
+.story-note {
+  max-width: 42ch;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+/* Wide images shift left or right in turn; panoramas take the row. */
+.story-full.side-0 > .story-figure { grid-column: 1 / span 10; }
+.story-full.side-1 > .story-figure { grid-column: 3 / -1; }
+.story-panorama > .story-figure { grid-column: 1 / -1; }
+.story-two-thirds.side-0 > .story-figure { grid-column: 2 / span 7; }
+.story-two-thirds.side-1 > .story-figure { grid-column: 5 / span 7; }
+
+/* A staggered pair: one larger, one smaller and lower. */
+.story-pair.side-0 > .story-figure:first-child { grid-column: 1 / span 6; }
+.story-pair.side-0 > .story-figure:last-child { grid-column: 8 / span 4; margin-top: clamp(96px, 16vw, 260px); }
+.story-pair.side-1 > .story-figure:first-child { grid-column: 2 / span 4; margin-top: clamp(96px, 16vw, 260px); }
+.story-pair.side-1 > .story-figure:last-child { grid-column: 7 / -1; }
+
+/* A single half: the image on one side, its caption in the open side. */
+.story-single.side-0 > .story-media { grid-column: 1 / span 6; }
+.story-single.side-0 > .story-caption { grid-column: 8 / span 4; }
+.story-single.side-1 > .story-media { grid-column: 7 / -1; grid-row: 1; }
+.story-single.side-1 > .story-caption { grid-column: 2 / span 4; grid-row: 1; text-align: right; justify-items: end; }
+
+.story-single > .story-caption {
+  align-self: end;
+  margin-top: 0;
+}
+
+/* A stepped series: each a little lower than the one before. */
+.story-series > .story-figure:nth-child(1) { grid-column: 1 / span 3; }
+.story-series > .story-figure:nth-child(2) { grid-column: 5 / span 3; margin-top: clamp(48px, 6vw, 96px); }
+.story-series > .story-figure:nth-child(3) { grid-column: 9 / span 3; margin-top: clamp(96px, 12vw, 192px); }
+.story-series.side-1 > .story-figure:nth-child(1) { grid-column: 2 / span 3; margin-top: clamp(96px, 12vw, 192px); }
+.story-series.side-1 > .story-figure:nth-child(2) { grid-column: 6 / span 3; }
+.story-series.side-1 > .story-figure:nth-child(3) { grid-column: 10 / span 3; margin-top: 0; }
+
+/* Text between images: a narrow column, left or right in turn. */
+.story-text {
+  grid-column: 2 / span 5;
+  display: grid;
+  gap: 16px;
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+.story-row.side-1 > .story-text {
+  grid-column: 7 / span 5;
+}
+
+.story-text h3 {
+  font-size: clamp(22px, 1.9vw, 30px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--ink);
 }
 
 .work-end {
@@ -199,17 +272,28 @@
     grid-column: 1 / -1;
   }
 
-  .work-figure.size-two-thirds,
-  .work-figure.size-half {
-    grid-column: 1 / -1;
+  .story {
+    gap: 88px;
   }
 
-  .work-figure.size-third {
-    grid-column: span 6;
+  .story-row > .story-figure,
+  .story-row > .story-media,
+  .story-row > .story-caption,
+  .story-row > .story-text {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    margin-top: 0 !important;
+    text-align: left !important;
+    justify-items: start !important;
   }
 
-  .work-gallery {
-    row-gap: 72px;
+  .story-single > .story-caption {
+    margin-top: 16px !important;
+  }
+
+  .story-pair,
+  .story-series {
+    row-gap: 56px;
   }
 
   .work-end {
@@ -314,21 +398,25 @@ a.lab-card:hover .lab-title {
 }
 
 /* Gallery */
-.gallery-grid {
-  columns: 3 280px;
-  column-gap: clamp(12px, 1.6vw, 24px);
+.gallery-story {
+  max-width: 1320px;
+  margin-inline: auto;
 }
 
-.gallery-item {
+.story-open {
   display: block;
   width: 100%;
-  margin-bottom: clamp(12px, 1.6vw, 24px);
-  break-inside: avoid;
   cursor: zoom-in;
 }
 
-.gallery-item .frame-path {
-  display: none;
+@media (hover: hover) {
+  .story-open img {
+    filter: grayscale(1);
+  }
+
+  .story-open:hover img {
+    filter: none;
+  }
 }
 
 .lightbox {
@@ -387,7 +475,9 @@ a.lab-card:hover .lab-title {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 32px clamp(16px, 2vw, 32px);
   align-items: start;
-  padding-bottom: clamp(64px, 8vw, 130px);
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-bottom: clamp(120px, 18vh, 220px);
 }
 
 .about-portrait {
@@ -424,15 +514,17 @@ a.lab-card:hover .lab-title {
 
 .cv {
   display: grid;
-  gap: clamp(48px, 6vw, 88px);
+  gap: clamp(88px, 12vw, 160px);
+  max-width: 1320px;
+  margin-inline: auto;
 }
 
 .cv-block {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 24px clamp(16px, 2vw, 32px);
-  padding-top: 18px;
-  border-top: 1px solid var(--ink);
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
 }
 
 .cv-block > h2 {
@@ -528,7 +620,7 @@ a.lab-card:hover .lab-title {
   grid-template-columns: 2fr 1fr 1fr;
   gap: 32px;
   padding-top: 22px;
-  border-top: 1px solid var(--ink);
+  border-top: 1px solid var(--line);
 }
 
 .contact-grid .eyebrow {

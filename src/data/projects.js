@@ -1,8 +1,14 @@
 // Every project on the site. Images live in public/images/projects/<slug>/;
-// a file that isn't there yet shows as a grey placeholder with its path.
+// a file that isn't there yet shows as a plain light grey block.
 //
-// size: how wide an image sits in the project page grid ('full', 'two-thirds', 'half', 'third').
-// ratio: the placeholder's shape until the real image arrives (real images keep their own shape).
+// images is the project page, top to bottom (see components/Story.jsx):
+//   size: 'full', 'two-thirds', 'half' or 'third'. Two halves in a row become a
+//     staggered pair; a run of thirds becomes a stepped series.
+//   ratio: the placeholder's shape until the real image arrives (real images
+//     keep their own shape). 2:1 or wider runs the full row.
+//   note: optional description shown with the caption.
+// To add a passage of text between images, put { heading: '…', text: ['…'] }
+// in the list where it should appear.
 
 export function imagesFor(folder) {
   return (file, caption, size = 'full', ratio = '16 / 9') => ({ src: `/images/${folder}/${file}.jpg`, caption, size, ratio })

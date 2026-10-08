@@ -1,11 +1,13 @@
 import { RippleImage } from './Ripple.jsx'
+import { Story } from './Story.jsx'
 import { Link, usePageTitle } from '../router.jsx'
 
 export const pad = (number) => String(number).padStart(2, '0')
 
 // One project page; AI Lab entries use the same layout. Kept quiet: a title,
-// the cover, a short text with the facts beside it, then each drawing on its
-// own with plenty of air, fading in as it comes into view.
+// the cover, a short text with the facts beside it, then the drawings and any
+// further text laid out with plenty of air (Story), fading in as they come
+// into view.
 export function WorkDetail({ item, list, base, backLabel }) {
   usePageTitle(item.title)
   const index = list.indexOf(item)
@@ -45,13 +47,8 @@ export function WorkDetail({ item, list, base, backLabel }) {
         ) : null}
       </section>
 
-      <section className="work-gallery page-pad" aria-label="Drawings and images">
-        {item.images.map((image) => (
-          <figure key={image.src} className={`work-figure size-${image.size}`}>
-            <RippleImage image={image} fit="natural" effect="fade" />
-            <figcaption>{image.caption}</figcaption>
-          </figure>
-        ))}
+      <section className="work-story page-pad" aria-label="Drawings and images">
+        <Story blocks={item.images} />
       </section>
 
       <nav className="work-end page-pad" aria-label="More work">

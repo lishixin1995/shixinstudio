@@ -11,9 +11,9 @@ The theme is still water: images surface like a ripple spreading from where a dr
 - **Home** — the SX Architecture cover, then the featured projects (The Pixel Cloud, S.I LINC, Render Exploration) and a short statement.
 - **About** — statement, profile, experience, education, skills and languages.
 - **Projects** — every project on one screen. On a computer: a quiet list of names beside one preview; the project under the pointer ripples into the preview from the side of its name. On a phone: one strip per project (tap to open it up, tap again to go in). Arrow keys browse, Enter opens.
-- **Project pages** — title, the cover, a short text with the facts beside it, then each drawing on its own, rippling in as it scrolls into view, and the next project.
-- **Gallery** — a grid of images that opens into a full-screen viewer.
-- **AI Lab** — AI renders and workflows; entries marked `soon` show as "Coming soon".
+- **Project pages** — title, the cover, a short text with the facts beside it, then the drawings laid out with plenty of air (`src/components/Story.jsx`): two halves become a staggered pair, a run of thirds a stepped series, wide images shift left or right in turn. Images fade in as they scroll into view. Text passages and per-image notes can be added between the drawings (see the top of `src/data/projects.js`).
+- **Gallery** — staggered pairs, like the project pages; each image opens full screen.
+- **AI Lab** — on a computer, the same quiet list and rippling preview as Projects; entries marked `soon` show as "Soon".
 - **Contact**
 
 ## Changing content
