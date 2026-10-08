@@ -1,0 +1,352 @@
+/* Tokens, type and shared pieces. White ground, black text, greys for
+   secondary text and blocks, and one accent: the red of the printed portfolio. */
+:root {
+  --bg: #ffffff;
+  --ink: #111111;
+  --ink-2: #4b4b4b;
+  --ink-3: #8b8b8b;
+  --ink-4: #c2c2c2;
+  --line: #e4e4e4;
+  --line-2: #cdcdcd;
+  --block: #f4f4f3;
+  --void: #f3f3f2;
+  --accent: #922224;
+
+  --font-display: 'Michroma', 'Eurostile', 'Microgramma', system-ui, sans-serif;
+  --font-text: 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --header-h: 4rem;
+  --gutter: clamp(1.25rem, 4vw, 10rem);
+  /* Content runs margin to margin; only a very wide screen gets a limit. */
+  --page-max: 160rem;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --water: cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Every size on the site is in rem, so on a computer the whole design scales
+   with the window: 16px at 1440px wide, smaller on a laptop, larger on a big
+   screen. Phones keep 16px. */
+@media (min-width: 761px) {
+  html {
+    font-size: clamp(14px, 0.5vw + 8.8px, 24px);
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 0.1875rem;
+}
+
+.page-pad {
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.muted {
+  color: var(--ink-3);
+}
+
+.index-number {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-mono);
+  font-size: 0.7188rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  padding-bottom: 0.1875rem;
+  transition: background-size 0.4s var(--ease), color 0.2s;
+}
+
+.text-link:hover {
+  color: var(--accent);
+  background-size: 100% 1px;
+}
+
+/* Image slots. Until a file is uploaded the slot is a plain, very light grey block. */
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--void);
+}
+
+.frame--cover {
+  aspect-ratio: var(--ratio);
+}
+
+.frame--cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frame--natural.is-loaded {
+  background: none;
+}
+
+.frame--natural img {
+  width: 100%;
+  height: auto;
+}
+
+.frame--natural:not(.is-loaded) {
+  aspect-ratio: var(--ratio);
+}
+
+.frame img {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.9s var(--ease), filter 0.6s ease;
+}
+
+.frame.is-loaded img {
+  opacity: 1;
+}
+
+/* Ripples: the theme. An image surfaces as a circle opening from where the
+   drop lands (--x, --y), with two thin rings running on past its edge. */
+.ripple {
+  position: relative;
+}
+
+.ripple-media {
+  clip-path: circle(0% at var(--x) var(--y));
+}
+
+.ripple.is-in .ripple-media {
+  animation: ripple-open 1.9s var(--water) both;
+}
+
+.ripple-ring {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 0;
+  aspect-ratio: 1;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ripple-ring + .ripple-ring {
+  border-color: var(--ink-4);
+}
+
+.ripple.is-in .ripple-ring {
+  animation: ripple-ring 2.4s var(--water) both;
+}
+
+.ripple.is-in .ripple-ring + .ripple-ring {
+  animation-delay: 0.32s;
+}
+
+/* Project pages use a plain fade instead. */
+.fade-media {
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.fade.is-in .fade-media {
+  opacity: 1;
+}
+
+@keyframes ripple-open {
+  from {
+    clip-path: circle(0% at var(--x) var(--y));
+    filter: blur(0.625rem);
+    transform: scale(1.035);
+  }
+  60% {
+    filter: blur(0);
+  }
+  to {
+    clip-path: circle(150% at var(--x) var(--y));
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+@keyframes ripple-ring {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.55;
+  }
+  100% {
+    width: var(--ring-reach, 135%);
+    opacity: 0;
+  }
+}
+
+.click-ripple {
+  position: fixed;
+  z-index: 90;
+  width: 0;
+  aspect-ratio: 1;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  translate: -50% -50%;
+  pointer-events: none;
+  animation: click-ripple 1s var(--water) forwards;
+}
+
+.click-ripple::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--ink-4);
+  border-radius: 50%;
+  scale: 0;
+  animation: click-ripple-inner 1s var(--water) 0.14s forwards;
+}
+
+@keyframes click-ripple {
+  from {
+    width: 0;
+    opacity: 0.8;
+  }
+  to {
+    width: 5.25rem;
+    opacity: 0;
+  }
+}
+
+@keyframes click-ripple-inner {
+  to {
+    scale: 1.5;
+    opacity: 0;
+  }
+}
+
+.page-fade {
+  /* Ripple rings may run past the window edge; they never widen the page. */
+  overflow-x: clip;
+  animation: page-in 0.6s var(--ease) both;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ripple-media {
+    clip-path: none;
+  }
+
+  .ripple-ring,
+  .click-ripple {
+    display: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* For blocks with a rule along the top: the rule stops at the margins. */
+.page-inset {
+  margin-inline: var(--gutter);
+}
