@@ -9,7 +9,7 @@
   --line: #e4e4e4;
   --line-2: #cdcdcd;
   --block: #f4f4f3;
-  --void: #ececea;
+  --void: #f3f3f2;
   --accent: #922224;
 
   --font-display: 'Michroma', 'Eurostile', 'Microgramma', system-ui, sans-serif;
@@ -19,6 +19,7 @@
   --header-h: 64px;
   --gutter: clamp(20px, 4vw, 64px);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --water: cubic-bezier(0.16, 0.84, 0.3, 1);
 }
 
 *,
@@ -140,8 +141,7 @@ img {
   background-size: 100% 1px;
 }
 
-/* Image slots. A slot with no file yet is drawn as a void: grey, crossed,
-   labelled with its caption and the path to upload to. */
+/* Image slots. Until a file is uploaded the slot is a plain, very light grey block. */
 .frame {
   position: relative;
   overflow: hidden;
@@ -180,42 +180,118 @@ img {
   opacity: 1;
 }
 
-.frame-void {
+/* Ripples: the theme. An image surfaces as a circle opening from where the
+   drop lands (--x, --y), with two thin rings running on past its edge. */
+.ripple {
+  position: relative;
+}
+
+.ripple-media {
+  clip-path: circle(0% at var(--x) var(--y));
+}
+
+.ripple.is-in .ripple-media {
+  animation: ripple-open 1.9s var(--water) both;
+}
+
+.ripple-ring {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: 6px;
-  padding: 16px;
-  text-align: center;
-  background:
-    linear-gradient(to top right, transparent calc(50% - 0.5px), var(--line-2) 50%, transparent calc(50% + 0.5px)),
-    linear-gradient(to bottom right, transparent calc(50% - 0.5px), var(--line-2) 50%, transparent calc(50% + 0.5px)),
-    var(--void);
+  left: var(--x);
+  top: var(--y);
+  width: 0;
+  aspect-ratio: 1;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.frame-caption {
-  max-width: 34ch;
-  padding: 2px 8px;
-  background: var(--void);
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--ink-2);
+.ripple-ring + .ripple-ring {
+  border-color: var(--ink-4);
 }
 
-.frame-path {
-  max-width: 100%;
-  padding: 2px 8px;
-  background: var(--void);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.02em;
-  color: var(--ink-3);
-  overflow-wrap: anywhere;
+.ripple.is-in .ripple-ring {
+  animation: ripple-ring 2.4s var(--water) both;
+}
+
+.ripple.is-in .ripple-ring + .ripple-ring {
+  animation-delay: 0.32s;
+}
+
+@keyframes ripple-open {
+  from {
+    clip-path: circle(0% at var(--x) var(--y));
+    filter: blur(10px);
+    transform: scale(1.035);
+  }
+  60% {
+    filter: blur(0);
+  }
+  to {
+    clip-path: circle(150% at var(--x) var(--y));
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+@keyframes ripple-ring {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.55;
+  }
+  100% {
+    width: 135%;
+    opacity: 0;
+  }
+}
+
+.click-ripple {
+  position: fixed;
+  z-index: 90;
+  width: 0;
+  aspect-ratio: 1;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  translate: -50% -50%;
+  pointer-events: none;
+  animation: click-ripple 1s var(--water) forwards;
+}
+
+.click-ripple::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--ink-4);
+  border-radius: 50%;
+  scale: 0;
+  animation: click-ripple-inner 1s var(--water) 0.14s forwards;
+}
+
+@keyframes click-ripple {
+  from {
+    width: 0;
+    opacity: 0.8;
+  }
+  to {
+    width: 84px;
+    opacity: 0;
+  }
+}
+
+@keyframes click-ripple-inner {
+  to {
+    scale: 1.5;
+    opacity: 0;
+  }
 }
 
 .page-fade {
+  /* Ripple rings may run past the window edge; they never widen the page. */
+  overflow-x: clip;
   animation: page-in 0.6s var(--ease) both;
 }
 
@@ -229,6 +305,15 @@ img {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .ripple-media {
+    clip-path: none;
+  }
+
+  .ripple-ring,
+  .click-ripple {
+    display: none;
   }
 
   *,

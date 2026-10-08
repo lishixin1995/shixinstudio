@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Frame } from '../components/Frame.jsx'
+import { RippleField, RippleImage } from '../components/Ripple.jsx'
 import { pad } from '../components/WorkDetail.jsx'
 import { findEntry } from '../data/aiLab.js'
 import { findProject } from '../data/projects.js'
@@ -29,7 +29,7 @@ export function Home() {
   return (
     <main>
       <section className="cover" aria-label="SX Architecture">
-        <div className="cover-grid" aria-hidden="true" />
+        <RippleField className="cover-water" />
         <div className="cover-center">
           <span className="tick tick-tl" aria-hidden="true" />
           <span className="tick tick-tr" aria-hidden="true" />
@@ -67,8 +67,8 @@ export function Home() {
           return (
             <article key={item.slug} className={`feature${index % 2 ? ' is-flipped' : ''}`}>
               <Link to={to} className="feature-image" aria-label={`Open ${item.title}`}>
-                <Frame image={item.cover} ratio="16 / 10" />
-                <span className="feature-view" aria-hidden="true">View</span>
+                {/* The drop lands on the side facing the text. */}
+                <RippleImage image={item.cover} ratio="16 / 10" origin={index % 2 ? ['0%', '72%'] : ['100%', '72%']} />
               </Link>
               <div className="feature-text">
                 <span className="index-number">{pad(index + 1)}</span>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Frame } from '../components/Frame.jsx'
+import { RippleImage } from '../components/Ripple.jsx'
 import { pad } from '../components/WorkDetail.jsx'
 import { gallery } from '../data/gallery.js'
 import { usePageTitle } from '../router.jsx'
@@ -35,7 +36,7 @@ export function Gallery() {
       <section className="gallery-grid page-pad" aria-label="Gallery">
         {gallery.map((image, index) => (
           <button key={image.src} type="button" className="gallery-item" onClick={() => setOpen(index)} aria-label={`Open ${image.caption}`}>
-            <Frame image={image} ratio={RATIOS[index % RATIOS.length]} />
+            <RippleImage image={image} ratio={RATIOS[index % RATIOS.length]} />
           </button>
         ))}
       </section>

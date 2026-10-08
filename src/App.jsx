@@ -1,5 +1,6 @@
 import { Footer } from './components/Footer.jsx'
 import { Header } from './components/Header.jsx'
+import { ClickRipples } from './components/Ripple.jsx'
 import { WorkDetail } from './components/WorkDetail.jsx'
 import { aiEntries, findEntry } from './data/aiLab.js'
 import { findProject, projects } from './data/projects.js'
@@ -39,6 +40,7 @@ export function App() {
   return (
     <>
       <Header />
+      <ClickRipples />
       <div className="page-fade" key={path}>
         {page(path)}
       </div>

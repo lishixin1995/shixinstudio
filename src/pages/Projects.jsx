@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Frame } from '../components/Frame.jsx'
+import { RippleImage } from '../components/Ripple.jsx'
 import { pad } from '../components/WorkDetail.jsx'
 import { categories, projects } from '../data/projects.js'
 import { Link, usePageTitle, useRouter } from '../router.jsx'
 
-// Every project fits on one screen, in one of two views:
-// Slices — one vertical strip per project; the strip under the pointer opens up.
-// Index — the project names as a list, with a large preview beside it.
-// Arrow keys browse (← → in both views, ↑ ↓ too in the index) and Enter
-// opens the project, whether or not anything has focus yet.
+// Every project fits on one screen.
+// Computers: a quiet list of names beside one preview; the project under the
+// pointer ripples into the preview from the side of its name.
+// Phones: Slices (one strip per project, tap to open it up) or Index.
+// Arrow keys browse and Enter opens, whether or not anything has focus yet.
 
 const VIEWS = [
   { key: 'slices', label: 'Slices' },
@@ -35,8 +36,138 @@ function saveView(view) {
 
 const hoverable = () => window.matchMedia?.('(hover: hover)').matches ?? true
 
+function useMedia(query) {
+  const [matches, setMatches] = useState(() => window.matchMedia(query).matches)
+  useEffect(() => {
+    const media = window.matchMedia(query)
+    const onChange = () => setMatches(media.matches)
+    media.addEventListener('change', onChange)
+    return () => media.removeEventListener('change', onChange)
+  }, [query])
+  return matches
+}
+
 export function Projects() {
   usePageTitle('Projects')
+  const compact = useMedia('(max-width: 760px)')
+  return compact ? <CompactProjects /> : <StillWaterIndex />
+}
+
+const countIn = (name) => (name === 'All' ? projects.length : projects.filter((project) => project.category === name).length)
+
+function StillWaterIndex() {
+  const { navigate } = useRouter()
+  const [filter, setFilter] = useState('All')
+  const list = useMemo(() => (filter === 'All' ? projects : projects.filter((project) => project.category === filter)), [filter])
+  // index: the project showing; previous: the one it ripples over; drop: counts
+  // ripples so each new one remounts; y: where on the preview's edge it lands.
+  const [shown, setShown] = useState({ index: 0, previous: -1, drop: 0, y: '50%' })
+  const rows = useRef([])
+  const preview = useRef(null)
+  const latest = useRef({})
+  latest.current = { shown, list }
+
+  const current = list[Math.min(shown.index, list.length - 1)]
+  const below = shown.previous >= 0 ? list[shown.previous] : null
+
+  // The drop lands on the preview's near edge, level with the name.
+  const landing = (index) => {
+    const row = rows.current[index]?.getBoundingClientRect()
+    const box = preview.current?.getBoundingClientRect()
+    if (!row || !box) return '50%'
+    const share = (row.top + row.height / 2 - box.top) / box.height
+    return `${(Math.min(0.92, Math.max(0.08, share)) * 100).toFixed(1)}%`
+  }
+
+  const show = (index) => {
+    setShown((state) => (state.index === index ? state : { index, previous: state.index, drop: state.drop + 1, y: landing(index) }))
+  }
+
+  const pickFilter = (name) => {
+    setFilter(name)
+    setShown((state) => ({ index: 0, previous: -1, drop: state.drop + 1, y: '50%' }))
+  }
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.metaKey || event.ctrlKey || event.altKey) return
+      const { shown: state, list: names } = latest.current
+      const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[event.key]
+      if (step) {
+        event.preventDefault()
+        const next = (state.index + step + names.length) % names.length
+        show(next)
+        if (document.activeElement?.closest('.still-list')) rows.current[next]?.focus()
+      } else if (event.key === 'Enter' && !event.target.closest?.('a, button')) {
+        navigate(`/projects/${names[state.index].slug}`)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+    // show only reads refs and the state setter.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate])
+
+  return (
+    <main className="still">
+      <header className="still-head">
+        <h1 className="still-title">Projects</h1>
+        <div className="still-filters" role="group" aria-label="Filter projects">
+          {['All', ...categories].map((name) => (
+            <button key={name} type="button" aria-pressed={filter === name} onClick={() => pickFilter(name)}>
+              {name}
+              <sup>{pad(countIn(name))}</sup>
+            </button>
+          ))}
+        </div>
+      </header>
+
+      <div className="still-body">
+        <nav className="still-list" aria-label="Projects">
+          <ol>
+            {list.map((project, index) => (
+              <li key={project.slug}>
+                <Link
+                  to={`/projects/${project.slug}`}
+                  ref={(element) => {
+                    rows.current[index] = element
+                  }}
+                  className={`still-row${index === shown.index ? ' is-active' : ''}`}
+                  onPointerEnter={(event) => event.pointerType === 'mouse' && show(index)}
+                  onFocus={(event) => event.currentTarget.matches(':focus-visible') && show(index)}
+                >
+                  <span className="still-num">{pad(projects.indexOf(project) + 1)}</span>
+                  <span className="still-name">{project.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+          <p className="still-count">
+            <span>{pad(shown.index + 1)}</span> / {pad(list.length)}
+          </p>
+        </nav>
+
+        <figure className="still-preview">
+          <div className="still-stage" ref={preview} onClick={() => navigate(`/projects/${current.slug}`)} aria-hidden="true">
+            {below ? (
+              <div className="still-layer" key={`below-${below.slug}`}>
+                <Frame image={below.cover} eager />
+              </div>
+            ) : null}
+            <RippleImage key={`drop-${shown.drop}`} className="still-layer" image={current.cover} play="now" origin={['0%', shown.y]} eager />
+          </div>
+          <figcaption className="still-caption" key={`caption-${shown.drop}`}>
+            <span className="still-kicker">{current.category} — {current.label}</span>
+            <span className="still-sub">{current.subtitle}</span>
+            <span className="still-meta">{[current.location, current.year].filter(Boolean).join(' · ')}</span>
+          </figcaption>
+        </figure>
+      </div>
+    </main>
+  )
+}
+
+function CompactProjects() {
   const { navigate } = useRouter()
   const [filter, setFilter] = useState('All')
   const [view, setView] = useState(readView)

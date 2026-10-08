@@ -1,4 +1,178 @@
-/* Projects: every project on one screen */
+/* Projects on a computer: a quiet list of names and one preview that the
+   hovered project ripples into from the side of its name. */
+.still {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(28px, 7vh, 88px);
+  padding: calc(var(--header-h) + clamp(28px, 7vh, 96px)) var(--gutter) clamp(28px, 6vh, 72px);
+}
+
+.still-head {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(28px, 4vw, 64px);
+}
+
+.still-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.still-filters {
+  display: flex;
+  gap: 28px;
+}
+
+.still-filters button {
+  position: relative;
+  padding: 4px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color 0.3s ease;
+}
+
+.still-filters sup {
+  margin-left: 4px;
+  font-size: 9px;
+  color: var(--ink-4);
+}
+
+.still-filters button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--water);
+}
+
+.still-filters button:hover,
+.still-filters button[aria-pressed="true"] {
+  color: var(--ink);
+}
+
+.still-filters button[aria-pressed="true"]::after {
+  transform: none;
+}
+
+.still-body {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(48px, 8vw, 168px);
+  align-items: center;
+}
+
+.still-list ol {
+  display: grid;
+  gap: clamp(4px, 1.2vh, 14px);
+}
+
+.still-row {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  align-items: baseline;
+  padding-block: 6px;
+  color: var(--ink-4);
+  transition: color 0.45s ease;
+}
+
+.still-num {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  transition: color 0.45s ease;
+}
+
+.still-name {
+  font-size: clamp(20px, min(2.1vw, 3.9vh), 34px);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  transition: transform 0.7s var(--water);
+}
+
+.still-row:hover,
+.still-row.is-active {
+  color: var(--ink);
+}
+
+.still-row.is-active .still-num {
+  color: var(--accent);
+}
+
+.still-row.is-active .still-name {
+  transform: translateX(10px);
+}
+
+.still-count {
+  margin-top: clamp(28px, 6vh, 64px);
+  padding-left: 46px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+
+.still-count span {
+  color: var(--accent);
+}
+
+.still-preview {
+  display: grid;
+  gap: 22px;
+}
+
+.still-stage {
+  position: relative;
+  height: min(56vh, 40vw);
+  cursor: pointer;
+}
+
+.still-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.still-layer .ripple-media,
+.still-layer .frame {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+}
+
+.still-caption {
+  display: grid;
+  gap: 4px;
+  animation: rise 0.9s var(--water) 0.35s both;
+}
+
+.still-kicker,
+.still-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.still-sub {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+/* Projects on a phone: every project on one screen */
 .projects-page {
   height: 100svh;
   min-height: 600px;
@@ -120,11 +294,6 @@
   position: absolute;
   inset: 0;
   aspect-ratio: auto;
-}
-
-.slice .frame-caption,
-.slice .frame-path {
-  display: none;
 }
 
 .slice img {

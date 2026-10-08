@@ -1,4 +1,4 @@
-import { Frame } from '../components/Frame.jsx'
+import { RippleImage } from '../components/Ripple.jsx'
 import { education, experience, languages, portrait, profile, site, skills, statement } from '../data/site.js'
 import { usePageTitle } from '../router.jsx'
 
@@ -13,7 +13,7 @@ export function About() {
 
       <section className="about-intro page-pad">
         <figure className="about-portrait">
-          <Frame image={{ src: portrait, caption: 'Portrait' }} ratio="4 / 5" eager />
+          <RippleImage image={{ src: portrait, caption: 'Portrait' }} ratio="4 / 5" play="now" eager />
           <figcaption>
             <span className="about-name">{site.name}</span>
             <span className="muted">{site.role} — {site.location}</span>

@@ -1,80 +1,67 @@
-import { Frame } from './Frame.jsx'
+import { RippleImage } from './Ripple.jsx'
 import { Link, usePageTitle } from '../router.jsx'
 
 export const pad = (number) => String(number).padStart(2, '0')
 
-// One project page; AI Lab entries use the same layout.
+// One project page; AI Lab entries use the same layout. Kept quiet: a title,
+// the cover, a short text with the facts beside it, then each drawing on its
+// own with plenty of air, rippling in as it comes into view.
 export function WorkDetail({ item, list, base, backLabel }) {
   usePageTitle(item.title)
   const index = list.indexOf(item)
-  const prev = list[(index - 1 + list.length) % list.length]
   const next = list[(index + 1) % list.length]
-  const meta = [['Type', item.label], ['Location', item.location], ['Year', item.year], ...(item.credits || [])].filter(([, value]) => value)
+  const facts = [['Type', item.label], ['Location', item.location], ['Year', item.year], ...(item.credits || [])].filter(([, value]) => value)
 
   return (
     <main className="work">
-      <section className="work-head page-pad">
-        <div className="work-index">
+      <section className="work-intro page-pad">
+        <p className="work-kicker">
           <span className="index-number">{pad(index + 1)}</span>
-          <span className="eyebrow">{item.category}</span>
-        </div>
-        <div>
-          <h1 className="work-title">{item.title}</h1>
-          <p className="work-subtitle">{item.subtitle}</p>
-        </div>
+          {item.category}
+        </p>
+        <h1 className="work-title">{item.title}</h1>
+        <p className="work-subtitle">{item.subtitle}</p>
       </section>
 
-      {meta.length ? (
-        <dl className="work-meta page-inset">
-          {meta.map(([label, value]) => (
-            <div key={label}>
-              <dt>{label}</dt>
-              <dd>{value}</dd>
-            </div>
-          ))}
-        </dl>
-      ) : null}
-
-      <div className="page-pad">
-        <Frame image={item.cover} fit="natural" className="work-hero" eager />
+      <div className="work-cover page-pad">
+        <RippleImage image={item.cover} fit="natural" play="now" origin={['50%', '62%']} eager />
       </div>
 
-      <section className="work-statement page-pad">
-        <div>
+      <section className="work-about page-pad">
+        <div className="work-words">
           {item.heading ? <h2>{item.heading}</h2> : null}
           {item.tagline ? <p className="tagline">{item.tagline}</p> : null}
+          {item.text.map((paragraph) => <p key={paragraph} className="work-text">{paragraph}</p>)}
         </div>
-        <div className="work-text">
-          {item.text.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-        </div>
+        {facts.length ? (
+          <dl className="work-facts">
+            {facts.map(([label, value]) => (
+              <div key={label}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
       </section>
 
-      <section className="work-images page-pad" aria-label="Drawings and images">
-        {item.images.map((image, number) => (
+      <section className="work-gallery page-pad" aria-label="Drawings and images">
+        {item.images.map((image) => (
           <figure key={image.src} className={`work-figure size-${image.size}`}>
-            <Frame image={image} fit="natural" />
-            <figcaption>
-              <span>{pad(number + 1)}</span>
-              {image.caption}
-            </figcaption>
+            <RippleImage image={image} fit="natural" />
+            <figcaption>{image.caption}</figcaption>
           </figure>
         ))}
       </section>
 
-      <nav className="work-nav page-inset" aria-label="More work">
+      <nav className="work-end page-pad" aria-label="More work">
+        <Link to={base} className="work-back">← {backLabel}</Link>
         {list.length > 1 ? (
-          <Link to={`${base}/${prev.slug}`} className="work-nav-link">
-            <span className="eyebrow">← Previous</span>
-            <span className="work-nav-title">{prev.title}</span>
+          <Link to={`${base}/${next.slug}`} className="work-next">
+            <span className="work-next-label">Next</span>
+            <span className="work-next-title">{next.title}</span>
           </Link>
-        ) : <span />}
-        <Link to={base} className="work-nav-all eyebrow">{backLabel}</Link>
-        {list.length > 1 ? (
-          <Link to={`${base}/${next.slug}`} className="work-nav-link is-next">
-            <span className="eyebrow">Next →</span>
-            <span className="work-nav-title">{next.title}</span>
-          </Link>
-        ) : <span />}
+        ) : null}
       </nav>
     </main>
   )

@@ -1,4 +1,4 @@
-import { Frame } from '../components/Frame.jsx'
+import { RippleImage } from '../components/Ripple.jsx'
 import { pad } from '../components/WorkDetail.jsx'
 import { aiEntries, aiLabIntro } from '../data/aiLab.js'
 import { Link, usePageTitle } from '../router.jsx'
@@ -18,7 +18,7 @@ export function AiLab() {
           const soon = entry.status === 'soon'
           const body = (
             <>
-              {soon ? null : <Frame image={entry.cover} ratio="16 / 10" />}
+              {soon ? null : <RippleImage image={entry.cover} ratio="16 / 10" />}
               <span className="lab-row">
                 <span className="index-number">{pad(index + 1)}</span>
                 <span className="lab-text">

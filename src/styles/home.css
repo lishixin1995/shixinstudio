@@ -8,16 +8,13 @@
   overflow: hidden;
 }
 
-/* A faint 12-column drafting grid that fades out toward the edges. */
-.cover-grid {
+/* Rings on still water behind the wordmark (RippleField). */
+.cover-water {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(to right, rgba(17, 17, 17, 0.055) 1px, transparent 1px);
-  background-size: calc((100% - 2 * var(--gutter)) / 12) 100%;
-  background-position: var(--gutter) 0;
-  -webkit-mask-image: radial-gradient(ellipse 70% 62% at 50% 50%, #000 20%, transparent 80%);
-  mask-image: radial-gradient(ellipse 70% 62% at 50% 50%, #000 20%, transparent 80%);
-  animation: fade-in 1.6s ease 0.1s both;
+  width: 100%;
+  height: 100%;
+  animation: fade-in 2s ease 0.2s both;
 }
 
 .cover-center {
@@ -222,7 +219,6 @@
   position: relative;
   grid-column: 1 / span 8;
   display: block;
-  overflow: hidden;
 }
 
 .feature-text {
@@ -267,20 +263,6 @@
   color: var(--accent);
 }
 
-.feature-view {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  padding: 10px 16px;
-  background: var(--bg);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  transform: translateY(100%);
-  transition: transform 0.5s var(--ease);
-}
-
 @media (hover: hover) {
   .feature-image img {
     filter: grayscale(1);
@@ -289,10 +271,6 @@
   .feature-image:hover img {
     filter: none;
     transform: scale(1.03);
-  }
-
-  .feature-image:hover .feature-view {
-    transform: none;
   }
 }
 
