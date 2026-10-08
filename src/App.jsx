@@ -30,7 +30,7 @@ function page(path) {
   }
   if (section === 'ai-lab') {
     const entry = findEntry(slug)
-    if (entry) return <WorkDetail key={slug} item={entry} list={liveEntries} base="/ai-lab" backLabel="AI Lab" />
+    if (entry) return <WorkDetail key={slug} item={entry} list={liveEntries} base="/ai-lab" backLabel="AI Lab" number={aiEntries.indexOf(entry) + 1} />
   }
   return <NotFound />
 }

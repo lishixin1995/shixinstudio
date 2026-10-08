@@ -8,7 +8,9 @@ export const pad = (number) => String(number).padStart(2, '0')
 // the cover, a short text with the facts beside it, then the drawings and any
 // further text laid out with plenty of air (Story), fading in as they come
 // into view.
-export function WorkDetail({ item, list, base, backLabel }) {
+// number: the item's place in its index list, when that list also holds
+// entries without a page (AI Lab).
+export function WorkDetail({ item, list, base, backLabel, number }) {
   usePageTitle(item.title)
   const index = list.indexOf(item)
   const next = list[(index + 1) % list.length]
@@ -18,7 +20,7 @@ export function WorkDetail({ item, list, base, backLabel }) {
     <main className="work">
       <section className="work-intro page-pad">
         <p className="work-kicker">
-          <span className="index-number">{pad(index + 1)}</span>
+          <span className="index-number">{pad(number ?? index + 1)}</span>
           {item.category}
         </p>
         <h1 className="work-title">{item.title}</h1>
