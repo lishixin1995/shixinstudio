@@ -76,11 +76,11 @@ export const projects = [
       linc('03-second-floor-plan', 'Second floor plan', 'half', '16 / 10'),
       linc('04-third-floor-plan', 'Third floor plan', 'half', '16 / 10'),
       linc('05-section', 'Section through the plant, pools and waterfront cafe', 'full', '3 / 1'),
-      linc('06-structural-model', 'Structural model', 'half', '16 / 10'),
+      linc('06-structural-model', 'Structural model', 'full', '16 / 10'),
       linc('07-cutaway-axonometric', 'Cutaway axonometric', 'half', '16 / 10'),
       linc('08-exploded-axonometric', 'Steel frame, incinerator and facade systems', 'half', '4 / 5'),
       linc('09-wall-section', 'Facade wall section', 'half', '4 / 5'),
-      linc('10-education-tour-detail', 'Education tour section detail', 'full', '16 / 9'),
+      linc('10-education-tour-detail', 'Education tour section detail', 'half', '4 / 5'),
       linc('11-waterfront', 'Waterfront elevation', 'full', '3 / 1'),
       linc('12-aerial', 'Aerial view', 'half', '16 / 9'),
       linc('13-courtyard', 'Waterfront courtyard', 'half', '16 / 9')
