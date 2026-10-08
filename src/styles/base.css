@@ -16,8 +16,10 @@
   --font-text: 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  --header-h: 64px;
-  --gutter: clamp(20px, 4vw, 64px);
+  --header-h: 4rem;
+  --gutter: clamp(1.25rem, 4vw, 10rem);
+  /* Content runs margin to margin; only a very wide screen gets a limit. */
+  --page-max: 160rem;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --water: cubic-bezier(0.16, 0.84, 0.3, 1);
 }
@@ -33,12 +35,21 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Every size on the site is in rem, so on a computer the whole design scales
+   with the window: 16px at 1440px wide, smaller on a laptop, larger on a big
+   screen. Phones keep 16px. */
+@media (min-width: 761px) {
+  html {
+    font-size: clamp(14px, 0.5vw + 8.8px, 24px);
+  }
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-text);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -94,7 +105,7 @@ img {
 
 :focus-visible {
   outline: 1px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 0.1875rem;
 }
 
 .page-pad {
@@ -103,7 +114,7 @@ img {
 
 .eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 400;
   letter-spacing: 0.14em;
   line-height: 1.5;
@@ -117,7 +128,7 @@ img {
 
 .index-number {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 0.8125rem;
   letter-spacing: 0.12em;
   color: var(--accent);
 }
@@ -127,12 +138,12 @@ img {
   align-items: center;
   gap: 0.4em;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 0.7188rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink);
   background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
-  padding-bottom: 3px;
+  padding-bottom: 0.1875rem;
   transition: background-size 0.4s var(--ease), color 0.2s;
 }
 
@@ -232,7 +243,7 @@ img {
 @keyframes ripple-open {
   from {
     clip-path: circle(0% at var(--x) var(--y));
-    filter: blur(10px);
+    filter: blur(0.625rem);
     transform: scale(1.035);
   }
   60% {
@@ -287,7 +298,7 @@ img {
     opacity: 0.8;
   }
   to {
-    width: 84px;
+    width: 5.25rem;
     opacity: 0;
   }
 }
@@ -308,7 +319,7 @@ img {
 @keyframes page-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(0.5rem);
   }
 }
 

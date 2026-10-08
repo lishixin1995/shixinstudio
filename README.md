@@ -27,6 +27,8 @@ All text and image lists live in `src/data/`:
 
 The accent red (`#922224`, from the printed portfolio) is the `--accent` token in `src/styles/base.css`.
 
+Every size in the stylesheets is in `rem`, and on a computer the root size follows the window width (16px at 1440px wide, smaller on a laptop, larger on a big screen), so the whole design scales instead of crowding or leaving wide empty margins. Phones keep 16px. The rule is at the top of `src/styles/base.css`.
+
 ## Images
 
 Upload images to `public/images/` at the paths listed in [`public/images/README.md`](public/images/README.md). Until an image is uploaded the site shows a plain, very light grey block in its place. Run `npm run images` to refresh that list and see which images are still missing.

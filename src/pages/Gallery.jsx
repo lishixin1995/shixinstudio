@@ -30,13 +30,12 @@ export function Gallery() {
   return (
     <main className="page">
       <section className="page-head page-pad">
-        <p className="eyebrow">Gallery</p>
-        <h1 className="page-title">Fragments, renders and studies.</h1>
+        <h1 className="page-name">Gallery</h1>
       </section>
 
       {/* Staggered pairs with plenty of air, like the project pages; each opens full screen. */}
       <section className="gallery-story page-pad" aria-label="Gallery">
-        <Story blocks={blocks} effect="ripple" onOpen={(image) => setOpen(image.index)} />
+        <Story blocks={blocks} effect="fade" onOpen={(image) => setOpen(image.index)} />
       </section>
 
       {open >= 0 ? (

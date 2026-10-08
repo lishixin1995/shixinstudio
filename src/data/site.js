@@ -66,8 +66,8 @@ export const education = [
 
 export const skills = [
   { group: 'Documentation & Modeling', items: ['AutoCAD', 'Revit', 'Rhinoceros'] },
-  { group: 'Visualization', items: ['Photoshop', 'Illustrator', 'InDesign'] },
-  { group: 'AI', items: ['Stable Diffusion', 'Midjourney'] }
+  { group: 'Visualization', items: ['D5 Render', 'ChatGPT 2.5', 'Photoshop', 'Illustrator', 'InDesign'] },
+  { group: 'AI', items: ['Codex', 'ChatGPT'] }
 ]
 
 export const languages = ['English', 'Mandarin', 'Cantonese']

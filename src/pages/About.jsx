@@ -1,5 +1,5 @@
 import { RippleImage } from '../components/Ripple.jsx'
-import { education, experience, languages, portrait, profile, site, skills, statement } from '../data/site.js'
+import { education, experience, languages, portrait, site, skills, statement } from '../data/site.js'
 import { usePageTitle } from '../router.jsx'
 
 export function About() {
@@ -20,7 +20,6 @@ export function About() {
           </figcaption>
         </figure>
         <div className="about-text">
-          <p className="about-profile">{profile}</p>
           <p>{statement.text}</p>
         </div>
       </section>

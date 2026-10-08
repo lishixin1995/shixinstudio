@@ -4,15 +4,9 @@ import { Link } from '../router.jsx'
 export function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-call">
-        <p className="eyebrow">Contact</p>
-        <a className="footer-mail" href={`mailto:${site.email}`}>{site.email}</a>
-      </div>
+      {/* One quiet line: the brand, the menu and the year. The email lives on the Contact page. */}
       <div className="footer-grid">
-        <div>
-          <p className="footer-brand">{site.brand}</p>
-          <p className="muted">{site.name} — {site.role}, {site.location}</p>
-        </div>
+        <p className="footer-brand">{site.brand}</p>
         <nav className="footer-nav" aria-label="Footer">
           {nav.map((item) => <Link key={item.path} to={item.path}>{item.label}</Link>)}
         </nav>

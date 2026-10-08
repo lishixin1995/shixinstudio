@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 1.5rem;
   padding-inline: var(--gutter);
   border-bottom: 1px solid transparent;
   transition: background 0.4s ease, border-color 0.4s ease;
@@ -15,14 +15,14 @@
 
 .site-header.is-solid {
   background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(0.75rem);
+  -webkit-backdrop-filter: blur(0.75rem);
   border-bottom-color: var(--line);
 }
 
 .brand {
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent);
@@ -37,16 +37,16 @@
 
 .site-nav {
   display: flex;
-  gap: clamp(18px, 2.6vw, 40px);
+  gap: clamp(1.125rem, 2.6vw, 2.5rem);
   margin-left: auto;
 }
 
 .site-nav a,
 .menu-button {
   position: relative;
-  padding: 6px 0;
+  padding: 0.375rem 0;
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 0.7188rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -102,8 +102,8 @@
     inset: var(--header-h) 0 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 32px var(--gutter);
+    gap: 0.375rem;
+    padding: 2rem var(--gutter);
     background: var(--bg);
     animation: page-in 0.4s var(--ease) both;
   }
@@ -111,17 +111,17 @@
   .mobile-menu a {
     display: flex;
     align-items: baseline;
-    gap: 16px;
-    padding: 10px 0;
+    gap: 1rem;
+    padding: 0.625rem 0;
     border-bottom: 1px solid var(--line);
-    font-size: 34px;
+    font-size: 2.125rem;
     font-weight: 300;
     letter-spacing: -0.01em;
   }
 
   .mobile-menu a span {
     font-family: var(--font-display);
-    font-size: 11px;
+    font-size: 0.6875rem;
     color: var(--accent);
   }
 
@@ -133,62 +133,40 @@
     margin-top: auto;
     border: 0;
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 0.75rem;
     color: var(--ink-3);
   }
 }
 
 .site-footer {
-  margin-top: clamp(80px, 12vw, 160px);
-  padding: clamp(48px, 7vw, 96px) var(--gutter) 32px;
+  margin-top: clamp(5rem, 12vw, 10rem);
+  padding: clamp(1.75rem, 3.4vw, 2.75rem) var(--gutter);
   border-top: 1px solid var(--line);
   background: var(--block);
 }
 
-.footer-call {
-  display: grid;
-  gap: 12px;
-  padding-bottom: clamp(40px, 6vw, 80px);
-}
-
-.footer-mail {
-  width: fit-content;
-  font-size: clamp(26px, 4.4vw, 64px);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  transition: color 0.2s;
-}
-
-.footer-mail:hover {
-  color: var(--accent);
-}
-
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 2fr 1fr;
-  gap: 24px;
-  align-items: end;
-  padding-top: 24px;
-  border-top: 1px solid var(--line-2);
-  font-size: 13px;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.125rem 1.5rem;
+  align-items: center;
+  font-size: 0.8125rem;
 }
 
 .footer-brand {
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 0.75rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 6px;
 }
 
 .footer-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
+  gap: 0.5rem 1.5rem;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -200,7 +178,7 @@
 .footer-copy {
   justify-self: end;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.08em;
 }
 
