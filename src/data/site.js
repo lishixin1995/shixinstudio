@@ -6,7 +6,7 @@ export const site = {
   role: 'Architectural Designer',
   location: 'New York',
   email: 'lishixin1995@gmail.com',
-  domain: 'shixinarchitecture.com',
+  domain: 'shixinstudio.com',
   selectedWork: '2022 — 2025'
 }
 
