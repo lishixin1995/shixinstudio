@@ -106,18 +106,30 @@
   line-height: 1.3;
 }
 
-/* A hairline drawn under the name, left to right. */
+/* A red hairline drawn under the name, left to right, led by a dot. */
 .still-name::after {
   content: "";
   position: absolute;
   left: 0;
-  right: 0;
   bottom: 0;
+  width: 0;
   height: 1px;
-  background: var(--ink);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.7s var(--water);
+  background: var(--accent);
+  transition: width 0.7s var(--water);
+}
+
+.still-name::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1.5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  translate: -50% 0;
+  opacity: 0;
+  transition: left 0.7s var(--water), opacity 0.3s ease;
 }
 
 .still-row:hover,
@@ -131,7 +143,13 @@
 
 .still-row:hover .still-name::after,
 .still-row.is-active .still-name::after {
-  transform: none;
+  width: 100%;
+}
+
+.still-row:hover .still-name::before,
+.still-row.is-active .still-name::before {
+  left: 100%;
+  opacity: 1;
 }
 
 .still-count {

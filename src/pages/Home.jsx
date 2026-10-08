@@ -29,7 +29,7 @@ export function Home() {
   return (
     <main>
       <section className="cover" aria-label="SX Architecture">
-        <RippleField className="cover-water" lens />
+        <RippleField className="cover-water" />
         <div className="cover-center">
           <h1 className="wordmark">
             <span>SX</span> <span>Architecture</span>
