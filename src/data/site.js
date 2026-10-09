@@ -27,7 +27,7 @@ export const statement = {
 }
 
 export const profile =
-  'Architectural designer with professional experience at Bade Stageberg Cox Architecture, contributing to construction documentation and illustrative site planning for residential and adaptive reuse projects. Proficient in Revit, AutoCAD, and Rhino, combining design creativity with technical precision in the development of architectural projects.'
+  'Architectural designer at IMC Architecture in New York, working on residential and mixed-use projects from schematic design through construction documentation. Proficient in Revit, AutoCAD, and Rhino, combining design creativity with technical precision.'
 
 export const portrait = '/images/about/portrait.jpg'
 
