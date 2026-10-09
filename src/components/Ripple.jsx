@@ -82,6 +82,8 @@ export function RippleField({ className = '' }) {
     const still = reducedMotion()
     let width = 0
     let height = 0
+    // Rings grow with the page: the root size is 16px at 1440px wide.
+    let scale = 1
     let rings = []
     let frame = 0
     let running = false
@@ -113,7 +115,7 @@ export function RippleField({ className = '' }) {
         const age = now - ring.born
         if (age < 0) continue
         const fade = 1 - age / ring.life
-        circle(ring.x, ring.y, ring.speed * age, ring.alpha * fade * fade)
+        circle(ring.x, ring.y, ring.speed * age * scale, ring.alpha * fade * fade)
       }
     }
 
@@ -121,6 +123,7 @@ export function RippleField({ className = '' }) {
       const box = canvas.getBoundingClientRect()
       width = box.width
       height = box.height
+      scale = parseFloat(getComputedStyle(document.documentElement).fontSize) / 16 || 1
       const dpr = Math.min(2, window.devicePixelRatio || 1)
       canvas.width = Math.round(width * dpr)
       canvas.height = Math.round(height * dpr)
@@ -151,7 +154,7 @@ export function RippleField({ className = '' }) {
       const x = event.clientX - box.left
       const y = event.clientY - box.top
       const now = performance.now()
-      if (Math.hypot(x - lastPointer.x, y - lastPointer.y) < 120 || now - lastPointer.at < 180) return
+      if (Math.hypot(x - lastPointer.x, y - lastPointer.y) < 120 * scale || now - lastPointer.at < 180) return
       lastPointer = { x, y, at: now }
       drop(x, y, POINTER_DROP, now)
     }

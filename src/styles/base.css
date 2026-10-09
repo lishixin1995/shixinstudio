@@ -17,9 +17,15 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   --header-h: 4rem;
-  --gutter: clamp(1.25rem, 4vw, 10rem);
-  /* Content runs margin to margin; only a very wide screen gets a limit. */
-  --page-max: 160rem;
+  /* The page is laid out on a canvas as wide as a 1920px window (104.348rem
+     at 18.4px). Up to 16:9 it fills the screen; on a wider screen (21:9) it
+     stays centred, and width-based sizes use --vw, a vw that stops growing
+     at the canvas, so nothing outgrows the text. */
+  --page-max: 104.348rem;
+  --vw: min(1vw, var(--page-max) / 100);
+  --gutter: clamp(1.25rem, calc(4 * var(--vw)), 10rem);
+  /* The side margin: the gutter, plus the room beside the canvas if any. */
+  --edge: max(var(--gutter), (100% - var(--page-max)) / 2 + var(--gutter));
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --water: cubic-bezier(0.16, 0.84, 0.3, 1);
 }
@@ -36,11 +42,21 @@ html {
 }
 
 /* Every size on the site is in rem, so on a computer the whole design scales
-   with the window: 16px at 1440px wide, smaller on a laptop, larger on a big
-   screen. Phones keep 16px. */
+   with the window: 16px at 1440px wide, smaller on a laptop, 18.4px at 1920.
+   Phones keep 16px. */
 @media (min-width: 761px) {
   html {
-    font-size: clamp(14px, 0.5vw + 8.8px, 24px);
+    font-size: clamp(14px, 0.5vw + 8.8px, 18.4px);
+  }
+}
+
+/* Past 1920px wide (2K, 4K, big monitors) the page grows in proportion, as
+   if the 1920 × 960 window were enlarged to fill the screen: by its width,
+   or by its height on a very wide screen, so nothing that fits one screen
+   at 1920 spills over. */
+@media (min-width: 1921px) {
+  html {
+    font-size: max(18.4px, min(0.95833vw, 1.91667vh));
   }
 }
 
@@ -109,7 +125,7 @@ img {
 }
 
 .page-pad {
-  padding-inline: var(--gutter);
+  padding-inline: var(--edge);
 }
 
 .eyebrow {
@@ -348,5 +364,5 @@ img {
 
 /* For blocks with a rule along the top: the rule stops at the margins. */
 .page-inset {
-  margin-inline: var(--gutter);
+  margin-inline: var(--edge);
 }

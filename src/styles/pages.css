@@ -5,17 +5,15 @@
 }
 
 .page-head {
-  max-width: var(--page-max);
-  margin-inline: auto;
   display: grid;
   gap: 1.125rem;
-  padding-top: clamp(3.5rem, 9vw, 9.375rem);
-  padding-bottom: clamp(2.5rem, 6vw, 5.5rem);
+  padding-top: clamp(3.5rem, calc(9 * var(--vw)), 9.375rem);
+  padding-bottom: clamp(2.5rem, calc(6 * var(--vw)), 5.5rem);
 }
 
 /* Page titles stay to one quiet line on a computer. */
 .page-title {
-  font-size: clamp(1.375rem, 2.3vw, 2.25rem);
+  font-size: clamp(1.375rem, calc(2.3 * var(--vw)), 2.25rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.3;
@@ -46,13 +44,6 @@
 
 /* Project page: a title, the cover, a short text with the facts beside it,
    then each drawing on its own with plenty of air. */
-.work-intro,
-.work-about,
-.work-end {
-  max-width: var(--page-max);
-  margin-inline: auto;
-}
-
 .work-intro {
   display: grid;
   gap: 1.125rem;
@@ -73,7 +64,7 @@
 
 .work-title {
   /* The same size as the About title: quiet, with the image doing the talking. */
-  font-size: clamp(1.375rem, 2.3vw, 2.25rem);
+  font-size: clamp(1.375rem, calc(2.3 * var(--vw)), 2.25rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.3;
@@ -81,19 +72,14 @@
 }
 
 .work-subtitle {
-  font-size: clamp(0.9375rem, 1.2vw, 1.125rem);
+  font-size: clamp(0.9375rem, calc(1.2 * var(--vw)), 1.125rem);
   color: var(--ink-3);
-}
-
-.work-cover {
-  max-width: var(--page-max);
-  margin-inline: auto;
 }
 
 .work-about {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 2.5rem clamp(1rem, 2vw, 2rem);
+  gap: 2.5rem clamp(1rem, calc(2 * var(--vw)), 2rem);
   padding-block: clamp(6rem, 20vh, 15rem);
 }
 
@@ -104,7 +90,7 @@
 }
 
 .work-words h2 {
-  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+  font-size: clamp(1.125rem, calc(1.5 * var(--vw)), 1.5rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -143,11 +129,6 @@
 }
 
 /* The story: one idea per row, rows alternating sides, lots of air. */
-.work-story {
-  max-width: var(--page-max);
-  margin-inline: auto;
-}
-
 .story {
   display: grid;
   gap: clamp(7.5rem, 22vh, 17.5rem);
@@ -156,7 +137,7 @@
 .story-row {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(1rem, 2vw, 2rem);
+  column-gap: clamp(1rem, calc(2 * var(--vw)), 2rem);
   align-items: start;
   margin: 0;
 }
@@ -190,8 +171,8 @@
 
 /* A staggered pair: one larger, one smaller and lower. */
 .story-pair.side-0 > .story-figure:first-child { grid-column: 1 / span 6; }
-.story-pair.side-0 > .story-figure:last-child { grid-column: 8 / span 4; margin-top: clamp(6rem, 16vw, 16.25rem); }
-.story-pair.side-1 > .story-figure:first-child { grid-column: 2 / span 4; margin-top: clamp(6rem, 16vw, 16.25rem); }
+.story-pair.side-0 > .story-figure:last-child { grid-column: 8 / span 4; margin-top: clamp(6rem, calc(16 * var(--vw)), 16.25rem); }
+.story-pair.side-1 > .story-figure:first-child { grid-column: 2 / span 4; margin-top: clamp(6rem, calc(16 * var(--vw)), 16.25rem); }
 .story-pair.side-1 > .story-figure:last-child { grid-column: 7 / -1; }
 
 /* A single half: the image on one side, its caption in the open side. */
@@ -207,9 +188,9 @@
 
 /* A stepped series: each a little lower than the one before. */
 .story-series > .story-figure:nth-child(1) { grid-column: 1 / span 3; }
-.story-series > .story-figure:nth-child(2) { grid-column: 5 / span 3; margin-top: clamp(3rem, 6vw, 6rem); }
-.story-series > .story-figure:nth-child(3) { grid-column: 9 / span 3; margin-top: clamp(6rem, 12vw, 12rem); }
-.story-series.side-1 > .story-figure:nth-child(1) { grid-column: 2 / span 3; margin-top: clamp(6rem, 12vw, 12rem); }
+.story-series > .story-figure:nth-child(2) { grid-column: 5 / span 3; margin-top: clamp(3rem, calc(6 * var(--vw)), 6rem); }
+.story-series > .story-figure:nth-child(3) { grid-column: 9 / span 3; margin-top: clamp(6rem, calc(12 * var(--vw)), 12rem); }
+.story-series.side-1 > .story-figure:nth-child(1) { grid-column: 2 / span 3; margin-top: clamp(6rem, calc(12 * var(--vw)), 12rem); }
 .story-series.side-1 > .story-figure:nth-child(2) { grid-column: 6 / span 3; }
 .story-series.side-1 > .story-figure:nth-child(3) { grid-column: 10 / span 3; margin-top: 0; }
 
@@ -228,7 +209,7 @@
 }
 
 .story-text h3 {
-  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+  font-size: clamp(1.125rem, calc(1.5 * var(--vw)), 1.5rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.25;
@@ -268,7 +249,7 @@
 }
 
 .work-next-title {
-  font-size: clamp(1.25rem, 2vw, 1.875rem);
+  font-size: clamp(1.25rem, calc(2 * var(--vw)), 1.875rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.3;
@@ -329,7 +310,7 @@
 .lab-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2.5rem, 5vw, 4.5rem) clamp(1rem, 2vw, 2rem);
+  gap: clamp(2.5rem, calc(5 * var(--vw)), 4.5rem) clamp(1rem, calc(2 * var(--vw)), 2rem);
 }
 
 .lab-card {
@@ -365,7 +346,7 @@
 
 .lab-title {
   display: block;
-  font-size: clamp(1.5rem, 2.6vw, 2.625rem);
+  font-size: clamp(1.5rem, calc(2.6 * var(--vw)), 2.625rem);
   font-weight: 300;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -416,11 +397,6 @@ a.lab-card:hover .lab-title {
 }
 
 /* Gallery */
-.gallery-story {
-  max-width: var(--page-max);
-  margin-inline: auto;
-}
-
 .story-open {
   display: block;
   width: 100%;
@@ -491,10 +467,8 @@ a.lab-card:hover .lab-title {
 .about-intro {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 2rem clamp(1rem, 2vw, 2rem);
+  gap: 2rem clamp(1rem, calc(2 * var(--vw)), 2rem);
   align-items: start;
-  max-width: var(--page-max);
-  margin-inline: auto;
   padding-bottom: clamp(7.5rem, 18vh, 13.75rem);
 }
 
@@ -525,15 +499,13 @@ a.lab-card:hover .lab-title {
 
 .cv {
   display: grid;
-  gap: clamp(5.5rem, 12vw, 10rem);
-  max-width: var(--page-max);
-  margin-inline: auto;
+  gap: clamp(5.5rem, calc(12 * var(--vw)), 10rem);
 }
 
 .cv-block {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1.5rem clamp(1rem, 2vw, 2rem);
+  gap: 1.5rem clamp(1rem, calc(2 * var(--vw)), 2rem);
   padding-top: 1.375rem;
   border-top: 1px solid var(--line);
 }
@@ -627,8 +599,6 @@ a.lab-card:hover .lab-title {
 
 /* Contact */
 .contact-grid {
-  width: min(calc(100% - 2 * var(--gutter)), calc(var(--page-max) - 2 * var(--gutter)));
-  margin-inline: auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 2rem;
@@ -641,7 +611,7 @@ a.lab-card:hover .lab-title {
 }
 
 .contact-mail {
-  font-size: clamp(1.5rem, 3.4vw, 3.375rem);
+  font-size: clamp(1.5rem, calc(3.4 * var(--vw)), 3.375rem);
   font-weight: 300;
   letter-spacing: -0.025em;
   line-height: 1.1;

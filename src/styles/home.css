@@ -21,14 +21,14 @@
   position: relative;
   display: grid;
   justify-items: center;
-  gap: clamp(1.125rem, 2.4vw, 1.875rem);
-  padding: clamp(1.75rem, 4vw, 3.5rem) clamp(1.5rem, 4.5vw, 5rem);
+  gap: clamp(1.125rem, calc(2.4 * var(--vw)), 1.875rem);
+  padding: clamp(1.75rem, calc(4 * var(--vw)), 3.5rem) clamp(1.5rem, calc(4.5 * var(--vw)), 5rem);
 }
 
 /* The name and the rule under it share one width. */
 .cover-name {
   display: grid;
-  gap: clamp(1.125rem, 2.4vw, 1.875rem);
+  gap: clamp(1.125rem, calc(2.4 * var(--vw)), 1.875rem);
 }
 
 /* The name is wiped in left to right behind a thin scan line. */
@@ -36,7 +36,7 @@
   position: relative;
   margin-right: -0.16em;
   font-family: var(--font-display);
-  font-size: clamp(1.625rem, 4.6vw, 6rem);
+  font-size: clamp(1.625rem, calc(4.6 * var(--vw)), 6rem);
   font-weight: 400;
   letter-spacing: 0.16em;
   line-height: 1;
@@ -160,7 +160,7 @@
 
 @media (max-width: 700px) {
   .wordmark {
-    font-size: 7.4vw;
+    font-size: calc(7.4 * var(--vw));
   }
 
   .cover-titles {
@@ -200,8 +200,8 @@
 /* Featured projects */
 .featured {
   display: grid;
-  gap: clamp(4.5rem, 9vw, 9.375rem);
-  padding-top: clamp(4rem, 8vw, 7.5rem);
+  gap: clamp(4.5rem, calc(9 * var(--vw)), 9.375rem);
+  padding-top: clamp(4rem, calc(8 * var(--vw)), 7.5rem);
 }
 
 .section-head {
@@ -221,13 +221,13 @@
 }
 
 .featured > .section-head + .feature {
-  margin-top: calc(-1 * clamp(1.5rem, 4vw, 5rem));
+  margin-top: calc(-1 * clamp(1.5rem, calc(4 * var(--vw)), 5rem));
 }
 
 .feature {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1.75rem clamp(1rem, 2vw, 2rem);
+  gap: 1.75rem clamp(1rem, calc(2 * var(--vw)), 2rem);
   align-items: end;
 }
 
@@ -257,7 +257,7 @@
 
 /* One line, a step below the page titles. */
 .feature-title {
-  font-size: clamp(1.25rem, 1.9vw, 1.875rem);
+  font-size: clamp(1.25rem, calc(1.9 * var(--vw)), 1.875rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.25;
@@ -309,15 +309,15 @@
 
 /* Statement */
 .statement-band {
-  margin-top: clamp(6.25rem, 12vw, 11.875rem);
-  padding-block: clamp(4rem, 9vw, 8.75rem);
+  margin-top: clamp(6.25rem, calc(12 * var(--vw)), 11.875rem);
+  padding-block: clamp(4rem, calc(9 * var(--vw)), 8.75rem);
   background: var(--block);
 }
 
 .statement-inner {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1.75rem clamp(1rem, 2vw, 2rem);
+  gap: 1.75rem clamp(1rem, calc(2 * var(--vw)), 2rem);
   align-items: start;
 }
 
@@ -330,7 +330,7 @@
 .statement-inner blockquote {
   grid-column: 1 / span 7;
   max-width: 24ch;
-  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  font-size: clamp(1.5rem, calc(2.5 * var(--vw)), 2.5rem);
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.3;
