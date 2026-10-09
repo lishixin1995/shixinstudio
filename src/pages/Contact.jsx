@@ -12,7 +12,7 @@ export function Contact() {
       <section className="contact-grid page-inset">
         <div>
           <p className="eyebrow">Email</p>
-          <a className="contact-mail" href={`mailto:${site.email}`}>{site.email}</a>
+          <p className="contact-value"><a className="contact-mail" href={`mailto:${site.email}`}>{site.email}</a></p>
         </div>
         <div>
           <p className="eyebrow">Based in</p>
