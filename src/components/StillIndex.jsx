@@ -3,6 +3,7 @@ import { Frame } from './Frame.jsx'
 import { RippleImage } from './Ripple.jsx'
 import { pad } from './WorkDetail.jsx'
 import { Link, useRouter } from '../router.jsx'
+import { Justified } from './Justified.jsx'
 
 export function useMedia(query) {
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches)
@@ -96,7 +97,7 @@ export function StillIndex({ heading, intro, items, base, filters }) {
             ))}
           </div>
         ) : null}
-        {intro ? <p className="still-intro">{intro}</p> : null}
+        {intro ? <Justified className="still-intro" text={intro} /> : null}
       </header>
 
       <div className="still-body">

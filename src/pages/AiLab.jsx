@@ -3,6 +3,7 @@ import { StillIndex, useMedia } from '../components/StillIndex.jsx'
 import { pad } from '../components/WorkDetail.jsx'
 import { aiEntries, aiLabIntro } from '../data/aiLab.js'
 import { Link, usePageTitle } from '../router.jsx'
+import { Justified } from '../components/Justified.jsx'
 
 // Computers get the same quiet list and rippling preview as Projects;
 // phones keep a simple column of entries.
@@ -15,7 +16,7 @@ export function AiLab() {
       <section className="page-head page-pad">
         <p className="eyebrow">AI Lab</p>
         <h1 className="page-title">Architecture, imagined with machines.</h1>
-        <p className="page-lede">{aiLabIntro}</p>
+        <Justified className="page-lede" text={aiLabIntro} />
       </section>
 
       <section className="lab-list page-pad" aria-label="AI Lab entries">

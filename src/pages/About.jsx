@@ -1,6 +1,7 @@
 import { RippleImage } from '../components/Ripple.jsx'
 import { education, experience, languages, portrait, site, skills, statement } from '../data/site.js'
 import { usePageTitle } from '../router.jsx'
+import { Justified } from '../components/Justified.jsx'
 
 export function About() {
   usePageTitle('About')
@@ -20,7 +21,7 @@ export function About() {
           </figcaption>
         </figure>
         <div className="about-text">
-          <p>{statement.text}</p>
+          <Justified text={statement.text} />
         </div>
       </section>
 
@@ -35,7 +36,7 @@ export function About() {
                   <p className="cv-title">{job.firm}</p>
                   <p className="muted">{job.role}</p>
                   <ul className="cv-points">
-                    {job.points.map((point) => <li key={point}>{point}</li>)}
+                    {job.points.map((point) => <Justified as="li" key={point} text={point} />)}
                   </ul>
                 </div>
               </li>
