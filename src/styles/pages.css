@@ -610,11 +610,8 @@ a.lab-card:hover .lab-title {
   margin-bottom: 0.75rem;
 }
 
+/* The email reads at the same size as the city beside it. */
 .contact-mail {
-  font-size: clamp(1.5rem, calc(3.4 * var(--vw)), 3.375rem);
-  font-weight: 300;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
   overflow-wrap: anywhere;
   transition: color 0.2s;
 }
