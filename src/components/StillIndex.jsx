@@ -16,10 +16,13 @@ export function useMedia(query) {
   return matches
 }
 
-// A quiet list of names beside one preview, all on one screen (computers).
-// The item under the pointer ripples into the preview from the side of its
-// name, and a red hairline led by a dot draws under the name. Arrow keys
-// browse and Enter opens. Items with status 'soon' are listed but not linked.
+// A quiet list of names and one preview, all on one screen. On a computer
+// the list sits beside the preview and the item under the pointer ripples
+// into it from the side of its name; on a phone the preview sits under the
+// list, and a first tap shows an item (rippling down from its name) while a
+// second tap opens it. A red hairline led by a dot draws under the chosen
+// name. Arrow keys browse and Enter opens. Items with status 'soon' are
+// listed but not linked.
 // filters: category names to filter by (optional); intro: a line under the heading.
 const live = (item) => item.status !== 'soon'
 const pick = (items, filter) => (filter === 'All' ? items : items.filter((item) => item.category === filter))
@@ -28,11 +31,12 @@ const firstLive = (list) => Math.max(0, list.findIndex(live))
 
 export function StillIndex({ heading, intro, items, base, filters }) {
   const { navigate } = useRouter()
+  const stacked = useMedia('(max-width: 760px)')
   const [filter, setFilter] = useState('All')
   const list = useMemo(() => pick(items, filter), [filter, items])
   // index: the item showing; previous: the one it ripples over; drop: counts
-  // ripples so each new one remounts; y: where on the preview's edge it lands.
-  const [shown, setShown] = useState(() => ({ index: firstLive(items), previous: -1, drop: 0, y: '50%' }))
+  // ripples so each new one remounts; at: where on the preview's edge it lands.
+  const [shown, setShown] = useState(() => ({ index: firstLive(items), previous: -1, drop: 0, at: null }))
   const rows = useRef([])
   const preview = useRef(null)
   const latest = useRef({})
@@ -41,22 +45,33 @@ export function StillIndex({ heading, intro, items, base, filters }) {
   const current = list[Math.min(shown.index, list.length - 1)]
   const below = shown.previous >= 0 ? list[shown.previous] : null
 
-  // The drop lands on the preview's near edge, level with the name.
+  // The drop lands on the preview's near edge, level with the name: its left
+  // edge beside the list, or its top edge, under the name, below it.
   const landing = (index) => {
-    const row = rows.current[index]?.getBoundingClientRect()
+    const row = rows.current[index]?.querySelector('.still-name')?.getBoundingClientRect()
     const box = preview.current?.getBoundingClientRect()
-    if (!row || !box) return '50%'
-    const share = (row.top + row.height / 2 - box.top) / box.height
-    return `${(Math.min(0.92, Math.max(0.08, share)) * 100).toFixed(1)}%`
+    if (!row || !box) return ['0%', '50%']
+    const clamp = (share) => `${(Math.min(0.92, Math.max(0.08, share)) * 100).toFixed(1)}%`
+    if (stacked) return [clamp((row.left + row.width / 2 - box.left) / box.width), '0%']
+    return ['0%', clamp((row.top + row.height / 2 - box.top) / box.height)]
   }
 
   const show = (index) => {
-    setShown((state) => (state.index === index ? state : { index, previous: state.index, drop: state.drop + 1, y: landing(index) }))
+    setShown((state) => (state.index === index ? state : { index, previous: state.index, drop: state.drop + 1, at: landing(index) }))
+  }
+
+  // Touch: the first tap on a name shows it, the next one opens it.
+  const lastPointer = useRef('mouse')
+  const onTap = (index) => (event) => {
+    if (lastPointer.current !== 'mouse' && index !== latest.current.shown.index) {
+      event.preventDefault()
+      show(index)
+    }
   }
 
   const pickFilter = (name) => {
     setFilter(name)
-    setShown((state) => ({ index: firstLive(pick(items, name)), previous: -1, drop: state.drop + 1, y: '50%' }))
+    setShown((state) => ({ index: firstLive(pick(items, name)), previous: -1, drop: state.drop + 1, at: null }))
   }
 
   const open = (item) => live(item) && navigate(`${base}/${item.slug}`)
@@ -110,6 +125,10 @@ export function StillIndex({ heading, intro, items, base, filters }) {
                 },
                 className: `still-row${index === shown.index ? ' is-active' : ''}${live(item) ? '' : ' is-soon'}`,
                 onPointerEnter: (event) => event.pointerType === 'mouse' && show(index),
+                onPointerDown: (event) => {
+                  lastPointer.current = event.pointerType
+                },
+                onClick: onTap(index),
                 onFocus: (event) => event.currentTarget.matches(':focus-visible') && show(index)
               }
               const body = (
@@ -138,7 +157,7 @@ export function StillIndex({ heading, intro, items, base, filters }) {
                 <Frame image={below.cover} eager />
               </div>
             ) : null}
-            <RippleImage key={`drop-${shown.drop}`} className="still-layer" image={current.cover} play="now" origin={['0%', shown.y]} eager />
+            <RippleImage key={`drop-${shown.drop}`} className="still-layer" image={current.cover} play="now" origin={shown.at ?? (stacked ? ['50%', '0%'] : ['0%', '50%'])} eager />
           </div>
           <figcaption className="still-caption" key={`caption-${shown.drop}`}>
             <span className="still-kicker">{live(current) ? [current.category, current.label].filter(Boolean).join(' — ') : `${current.category} — Coming soon`}</span>
