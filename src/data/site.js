@@ -27,11 +27,21 @@ export const statement = {
 }
 
 export const profile =
-  'Architectural designer with professional experience at Bade Stageberg Cox Architecture, contributing to construction documentation and illustrative site planning for residential and adaptive reuse projects. Proficient in Revit, AutoCAD, and Rhino, combining design creativity with technical precision in the development of architectural projects.'
+  'Architectural designer at IMC Architecture in New York, working on residential and mixed-use projects from schematic design through construction documentation. Proficient in Revit, AutoCAD, and Rhino, combining design creativity with technical precision.'
 
 export const portrait = '/images/about/portrait.jpg'
 
 export const experience = [
+  {
+    years: 'Mar 2026 — Present',
+    role: 'Intermediate Designer',
+    firm: 'IMC Architecture',
+    points: [
+      'Contribute to residential and mixed-use projects in New York City, from schematic design through construction documentation.',
+      'Develop Revit models, plans, elevations, and architectural details, translating design intent into coordinated drawing sets.',
+      'Evaluate zoning requirements and develop massing and layout studies to balance spatial quality, development goals, and constructability.'
+    ]
+  },
   {
     years: 'Nov 2024 — Sep 2025',
     role: 'Junior Architectural Designer',
