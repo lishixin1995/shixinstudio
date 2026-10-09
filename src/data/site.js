@@ -33,6 +33,16 @@ export const portrait = '/images/about/portrait.jpg'
 
 export const experience = [
   {
+    years: 'Mar 2026 — Present',
+    role: 'Intermediate Designer',
+    firm: 'IMC Architecture',
+    points: [
+      'Contribute to residential and mixed-use projects in New York City, from schematic design through construction documentation.',
+      'Develop Revit models, plans, elevations, and architectural details, translating design intent into coordinated drawing sets.',
+      'Evaluate zoning requirements and develop massing and layout studies to balance spatial quality, development goals, and constructability.'
+    ]
+  },
+  {
     years: 'Nov 2024 — Sep 2025',
     role: 'Junior Architectural Designer',
     firm: 'Bade Stageberg Cox Architecture',
