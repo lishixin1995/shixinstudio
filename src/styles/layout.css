@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding-inline: var(--gutter);
+  padding-inline: var(--edge);
   border-bottom: 1px solid transparent;
   transition: background 0.4s ease, border-color 0.4s ease;
 }
@@ -42,7 +42,7 @@
 
 .site-nav {
   display: flex;
-  gap: clamp(1.125rem, 2.6vw, 2.5rem);
+  gap: clamp(1.125rem, calc(2.6 * var(--vw)), 2.5rem);
   margin-left: auto;
 }
 
@@ -144,8 +144,8 @@
 }
 
 .site-footer {
-  margin-top: clamp(5rem, 12vw, 10rem);
-  padding: clamp(1.75rem, 3.4vw, 2.75rem) var(--gutter);
+  margin-top: clamp(5rem, calc(12 * var(--vw)), 10rem);
+  padding: clamp(1.75rem, calc(3.4 * var(--vw)), 2.75rem) var(--edge);
   border-top: 1px solid var(--line);
   background: var(--block);
 }

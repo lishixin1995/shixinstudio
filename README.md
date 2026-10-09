@@ -27,7 +27,7 @@ All text and image lists live in `src/data/`:
 
 The accent red (`#922224`, from the printed portfolio) is the `--accent` token in `src/styles/base.css`.
 
-Every size in the stylesheets is in `rem`, and on a computer the root size follows the window width (16px at 1440px wide, smaller on a laptop, larger on a big screen), so the whole design scales instead of crowding or leaving wide empty margins. Phones keep 16px. The rule is at the top of `src/styles/base.css`.
+Every size in the stylesheets is in `rem`, and on a computer the root size follows the window width (16px at 1440px wide, smaller on a laptop, 18.4px at 1920), so the whole design scales instead of crowding or leaving wide empty margins. Past 1920px (2K, 4K, big monitors) the page grows in exact proportion, as if the 1920 layout were enlarged to fill the screen; on an ultrawide screen it stays centred at that shape. Phones keep 16px. The rules are at the top of `src/styles/base.css`; width-based sizes use `var(--vw)` and side margins `var(--edge)`.
 
 ## Images
 
