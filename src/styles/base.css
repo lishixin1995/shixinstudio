@@ -13,8 +13,11 @@
   --accent: #922224;
 
   --font-display: 'Michroma', 'Eurostile', 'Microgramma', system-ui, sans-serif;
-  --font-text: 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  /* Two typefaces: Michroma for the name, the mark and the red numbers;
+     IBM Plex Mono for everything else. Weight (400 / 500) and grey tones
+     carry the hierarchy. */
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-text: var(--font-mono);
 
   --header-h: 4rem;
   /* The page is laid out on a canvas as wide as a 1920px window (104.348rem

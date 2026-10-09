@@ -257,9 +257,9 @@
 
 /* One line, a step below the page titles. */
 .feature-title {
-  font-size: clamp(1.25rem, calc(1.9 * var(--vw)), 1.875rem);
-  font-weight: 300;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.125rem, calc(1.9 * var(--vw)), 1.875rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.25;
 }
 
@@ -305,6 +305,10 @@
     grid-column: 1 / -1;
     grid-row: auto;
   }
+
+  .feature-title {
+    font-size: 1.25rem;
+  }
 }
 
 /* Statement */
@@ -329,10 +333,10 @@
 /* Two calm lines at most. */
 .statement-inner blockquote {
   grid-column: 1 / span 7;
-  max-width: 24ch;
+  max-width: 28ch;
   font-size: clamp(1.5rem, calc(2.5 * var(--vw)), 2.5rem);
-  font-weight: 300;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.3;
   text-wrap: balance;
 }
@@ -343,7 +347,7 @@
   gap: 1.25rem;
   justify-items: start;
   padding-top: 0.45em;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.7;
   color: var(--ink-2);
 }
@@ -354,6 +358,11 @@
   .statement-side {
     grid-column: 1 / -1;
     padding-top: 0;
+  }
+
+  /* Still two lines on a phone. */
+  .statement-inner blockquote {
+    font-size: 1.3125rem;
   }
 }
 
