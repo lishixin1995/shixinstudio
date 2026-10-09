@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { nav, site } from '../data/site.js'
 import { Link, useRouter } from '../router.jsx'
+import { Logo } from './Logo.jsx'
 
 // Fixed menu bar. On the home cover it stays clear and drops the brand,
 // since the cover already shows it; past the cover it turns solid.
@@ -35,8 +36,8 @@ export function Header() {
 
   return (
     <header className={`site-header${past ? ' is-solid' : ''}${open ? ' is-open' : ''}`}>
-      <Link to="/" className={`brand${home && !past && !open ? ' is-hidden' : ''}`} aria-label={`${site.brand} — home`}>
-        {site.brand}
+      <Link to="/" className={`brand${home && !past && !open ? ' is-hidden' : ''}`} aria-label={`${site.name} — home`}>
+        <Logo />
       </Link>
       <nav className="site-nav" aria-label="Main">
         {nav.map((item) => (

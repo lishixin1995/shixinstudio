@@ -48,6 +48,6 @@ export function Link({ to, onClick, children, ...rest }) {
 
 export function usePageTitle(title) {
   useEffect(() => {
-    document.title = title ? `${title} — SX Architecture` : 'SX Architecture — Shixin Doris Li'
+    document.title = title ? `${title} — Shixin Li` : 'Shixin Li — Architectural Designer'
   }, [title])
 }

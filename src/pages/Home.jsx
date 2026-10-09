@@ -28,14 +28,27 @@ export function Home() {
   usePageTitle('')
   return (
     <main>
-      <section className="cover" aria-label="SX Architecture">
+      <section className="cover" aria-label={site.name}>
         <RippleField className="cover-water" />
         <div className="cover-center">
-          <h1 className="wordmark">
-            <span>SX</span> <span>Architecture</span>
-          </h1>
-          <span className="cover-rule" aria-hidden="true" />
-          <p className="cover-place">{site.location}</p>
+          {/* The rule runs exactly under the name. */}
+          <div className="cover-name">
+            <h1 className="wordmark">{site.name}</h1>
+            <span className="cover-rule" aria-hidden="true" />
+          </div>
+          <div className="cover-lines">
+            <p className="cover-titles">
+              {site.titles.map((title, index) => (
+                <span key={title}>{index ? <span className="cover-slash" aria-hidden="true">/</span> : null}{title}</span>
+              ))}
+            </p>
+            <p className="cover-fields">
+              {site.fields.map((field, index) => (
+                <span key={field}>{index ? <span className="cover-dot" aria-hidden="true">·</span> : null}{field}</span>
+              ))}
+            </p>
+            <p className="cover-place">{site.location}</p>
+          </div>
         </div>
         <div className="cover-foot page-pad">
           <span>Local time <Clock /></span>

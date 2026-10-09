@@ -1,9 +1,11 @@
 // Everything about the person behind the site: header, About, Contact and footer read from here.
 
 export const site = {
-  brand: 'SX Architecture',
-  name: 'Shixin Doris Li',
+  name: 'Shixin Li',
   role: 'Architectural Designer',
+  // The cover, under the name.
+  titles: ['Architectural Designer', 'Creative Technologist'],
+  fields: ['Architecture', 'Visualization', 'Computational Design'],
   location: 'New York',
   email: 'lishixin1995@gmail.com',
   domain: 'shixinstudio.com',
