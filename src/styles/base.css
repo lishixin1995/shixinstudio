@@ -145,6 +145,53 @@ img {
   color: var(--ink-3);
 }
 
+/* Body copy is set flush on both edges with even word spaces (Justified.jsx).
+   Until it has measured, the browser justifies the hyphenated text itself.
+   Titles, labels and short lines stay ragged. */
+.page-lede,
+.still-intro,
+.work-text,
+.story-text p,
+.story-note,
+.about-text,
+.statement-side > p,
+.cv-points li {
+  text-align: justify;
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}
+
+.justified-text,
+.justified-line {
+  display: block;
+}
+
+/* Phones: wider margins and a little more air between lines. */
+@media (max-width: 760px) {
+  :root {
+    --gutter: 1.75rem;
+  }
+
+  .page-lede,
+  .still-intro,
+  .work-text,
+  .story-text p,
+  .story-note,
+  .about-text,
+  .statement-side > p,
+  .cv-points li {
+    line-height: 1.85;
+  }
+
+  .cv-points {
+    gap: 0.75rem;
+  }
+}
+
+.justified-line {
+  white-space: pre;
+}
+
 .index-number {
   font-family: var(--font-display);
   font-size: 0.8125rem;

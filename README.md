@@ -10,10 +10,10 @@ The theme is still water: images surface like a ripple spreading from where a dr
 
 - **Home** — the cover (the name, her titles and fields, New York), then the featured projects (The Pixel Cloud, S.I LINC, Render Exploration) and a short statement.
 - **About** — statement, profile, experience, education, skills and languages.
-- **Projects** — every project on one screen. On a computer: a quiet list of names beside one preview; the project under the pointer ripples into the preview from the side of its name. On a phone: one strip per project (tap to open it up, tap again to go in). Arrow keys browse, Enter opens.
+- **Projects** — every project on one screen: a quiet list of names and one preview. On a computer the list sits beside the preview and the project under the pointer ripples into it from the side of its name; on a phone the preview sits under the list, a first tap shows a project and a second tap opens it. Arrow keys browse, Enter opens.
 - **Project pages** — title, the cover, a short text with the facts beside it, then the drawings laid out with plenty of air (`src/components/Story.jsx`): two halves become a staggered pair, a run of thirds a stepped series, wide images shift left or right in turn. Images fade in as they scroll into view. Text passages and per-image notes can be added between the drawings (see the top of `src/data/projects.js`).
 - **Gallery** — staggered pairs, like the project pages; each image opens full screen.
-- **AI Lab** — on a computer, the same quiet list and rippling preview as Projects; entries marked `soon` show as "Soon".
+- **AI Lab** — the same list and rippling preview as Projects, on computers and phones; entries marked `soon` show as "Soon".
 - **Contact**
 
 ## Changing content
@@ -26,6 +26,8 @@ All text and image lists live in `src/data/`:
 - `gallery.js` — gallery images.
 
 The accent red (`#922224`, from the printed portfolio) is the `--accent` token in `src/styles/base.css`.
+
+Body text is set flush on both edges with even word spaces (`src/components/Justified.jsx`): since the type is monospaced, each paragraph is broken into lines for the whole paragraph at once, long words break at hyphenation points (`src/hyphenate.js`, using the `hyphen` package), and each full line takes up its last few pixels as a hair of letter spacing shared by every character. Wrap new body text in `<Justified text={...} />`.
 
 Every size in the stylesheets is in `rem`, and on a computer the root size follows the window width (16px at 1440px wide, smaller on a laptop, 18.4px at 1920), so the whole design scales instead of crowding or leaving wide empty margins. Past 1920px (2K, 4K, big monitors) the page grows in exact proportion, as if the 1920 layout were enlarged to fill the screen; on an ultrawide screen it stays centred at that shape. Phones keep 16px. The rules are at the top of `src/styles/base.css`; width-based sizes use `var(--vw)` and side margins `var(--edge)`.
 

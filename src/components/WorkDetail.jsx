@@ -1,6 +1,7 @@
 import { RippleImage } from './Ripple.jsx'
 import { Story } from './Story.jsx'
 import { Link, usePageTitle } from '../router.jsx'
+import { Justified } from './Justified.jsx'
 
 export const pad = (number) => String(number).padStart(2, '0')
 
@@ -35,7 +36,7 @@ export function WorkDetail({ item, list, base, backLabel, number }) {
         <div className="work-words">
           {item.heading ? <h2>{item.heading}</h2> : null}
           {item.tagline ? <p className="tagline">{item.tagline}</p> : null}
-          {item.text.map((paragraph) => <p key={paragraph} className="work-text">{paragraph}</p>)}
+          {item.text.map((paragraph) => <Justified key={paragraph} className="work-text" text={paragraph} />)}
         </div>
         {facts.length ? (
           <dl className="work-facts">

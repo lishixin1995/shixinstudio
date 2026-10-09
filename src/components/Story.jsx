@@ -1,4 +1,5 @@
 import { RippleImage } from './Ripple.jsx'
+import { Justified } from './Justified.jsx'
 
 // Lays out a project's images and text with air between them, never as a
 // tight grid. Each row holds one idea, rows alternate sides, and no two rows
@@ -66,7 +67,7 @@ function Caption({ image }) {
   return (
     <figcaption className="story-caption">
       {image.caption ? <span>{image.caption}</span> : null}
-      {image.note ? <p className="story-note">{image.note}</p> : null}
+      {image.note ? <Justified className="story-note" text={image.note} /> : null}
     </figcaption>
   )
 }
@@ -82,7 +83,7 @@ export function Story({ blocks, effect = 'fade', onOpen }) {
             <div key={`text-${index}`} className={className}>
               <div className="story-text">
                 {block.heading ? <h3>{block.heading}</h3> : null}
-                {[].concat(block.text).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {[].concat(block.text).map((paragraph) => <Justified key={paragraph} text={paragraph} />)}
               </div>
             </div>
           )

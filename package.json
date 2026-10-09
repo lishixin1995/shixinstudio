@@ -10,6 +10,7 @@
     "images": "node scripts/image-list.mjs"
   },
   "dependencies": {
+    "hyphen": "^1.14.1",
     "react": "19.2.7",
     "react-dom": "19.2.7"
   },

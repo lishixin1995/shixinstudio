@@ -5,6 +5,7 @@ import { findEntry } from '../data/aiLab.js'
 import { findProject } from '../data/projects.js'
 import { profile, site, statement } from '../data/site.js'
 import { Link, usePageTitle } from '../router.jsx'
+import { Justified } from '../components/Justified.jsx'
 
 // The three works shown under the cover; each opens its own page.
 const featured = [
@@ -93,7 +94,7 @@ export function Home() {
           <p className="eyebrow">About</p>
           <blockquote>{statement.title}</blockquote>
           <div className="statement-side">
-            <p>{profile}</p>
+            <Justified text={profile} />
             <Link to="/about" className="text-link">About Shixin →</Link>
           </div>
         </div>
