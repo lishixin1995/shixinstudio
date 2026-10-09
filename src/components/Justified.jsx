@@ -1,15 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { hyphenate } from '../hyphenate.js'
 
-const SHY = '­'
+const SHY = '\u00AD'
 
-// Body copy set flush on both edges with even word spaces. The text is in a
-// monospaced face, so a line's width is its length in characters: the copy
-// is broken into lines of at most `capacity` characters (at spaces, or inside
-// a long word at a hyphenation point), and each full line takes up the few
-// pixels it is short of the edge as a hair of extra letter spacing, shared
-// evenly by every character and space. Before it has measured, and if
-// scripts fail, the text falls back to the browser's own justification.
 // The places a word may break: at a soft hyphen (a hyphen then shows at the
 // line end) or just after a hyphen it already has (waste-to-energy).
 function pieces(word) {
@@ -74,6 +67,13 @@ export function breakLines(text, capacity) {
   return lines
 }
 
+// Body copy set flush on both edges with even word spaces. The text is in a
+// monospaced face, so a line's width is its length in characters: the copy
+// is broken into lines of at most `capacity` characters (at spaces, or inside
+// a long word at a hyphenation point), and each full line takes up the few
+// pixels it is short of the edge as a hair of extra letter spacing, shared
+// evenly by every character and space. Before it has measured, and if
+// scripts fail, the text falls back to the browser's own justification.
 // The lines sit in one block (`.justified-text`), so they stay together
 // inside a parent laid out as a grid, like the dash and text of a CV point.
 export function Justified({ as: Tag = 'p', className, text }) {

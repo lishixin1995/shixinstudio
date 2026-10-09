@@ -166,6 +166,28 @@ img {
   display: block;
 }
 
+/* Phones: wider margins and a little more air between lines. */
+@media (max-width: 760px) {
+  :root {
+    --gutter: 1.75rem;
+  }
+
+  .page-lede,
+  .still-intro,
+  .work-text,
+  .story-text p,
+  .story-note,
+  .about-text,
+  .statement-side > p,
+  .cv-points li {
+    line-height: 1.85;
+  }
+
+  .cv-points {
+    gap: 0.75rem;
+  }
+}
+
 .justified-line {
   white-space: pre;
 }

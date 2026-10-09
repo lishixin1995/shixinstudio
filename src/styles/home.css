@@ -188,12 +188,24 @@
   }
 
   .cover-foot {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
     font-size: 0.625rem;
+    letter-spacing: 0.08em;
+  }
+
+  .cover-foot > * {
+    white-space: nowrap;
   }
 
   .cover-scroll {
     display: none;
+  }
+}
+
+@media (max-width: 370px) {
+  .cover-foot {
+    letter-spacing: 0.02em;
   }
 }
 
