@@ -1,6 +1,6 @@
-# SX Architecture
+# Shixin Li
 
-Portfolio website of Shixin Doris Li — architectural designer, New York.
+Portfolio website of Shixin Li — architectural designer and creative technologist, New York. The menu bar carries the SX. mark (`src/components/Logo.jsx`, also `public/favicon.svg`): S and X from Michroma, the cover typeface, all in the accent red.
 
 Built with React and Vite, deployed on Cloudflare Pages (build command `npm run build`, output folder `dist`). `public/_redirects` sends every path to the single page app.
 
@@ -8,7 +8,7 @@ Built with React and Vite, deployed on Cloudflare Pages (build command `npm run 
 
 The theme is still water: images surface like a ripple spreading from where a drop lands, clicks leave a ring, and the cover is a slow field of rings (`src/components/Ripple.jsx`). Layouts stay minimal, with plenty of white space.
 
-- **Home** — the SX Architecture cover, then the featured projects (The Pixel Cloud, S.I LINC, Render Exploration) and a short statement.
+- **Home** — the cover (the name, her titles and fields, New York), then the featured projects (The Pixel Cloud, S.I LINC, Render Exploration) and a short statement.
 - **About** — statement, profile, experience, education, skills and languages.
 - **Projects** — every project on one screen. On a computer: a quiet list of names beside one preview; the project under the pointer ripples into the preview from the side of its name. On a phone: one strip per project (tap to open it up, tap again to go in). Arrow keys browse, Enter opens.
 - **Project pages** — title, the cover, a short text with the facts beside it, then the drawings laid out with plenty of air (`src/components/Story.jsx`): two halves become a staggered pair, a run of thirds a stepped series, wide images shift left or right in turn. Images fade in as they scroll into view. Text passages and per-image notes can be added between the drawings (see the top of `src/data/projects.js`).

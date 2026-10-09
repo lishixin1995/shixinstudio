@@ -25,7 +25,13 @@
   padding: clamp(1.75rem, 4vw, 3.5rem) clamp(1.5rem, 4.5vw, 5rem);
 }
 
-/* The wordmark is wiped in left to right behind a thin scan line. */
+/* The name and the rule under it share one width. */
+.cover-name {
+  display: grid;
+  gap: clamp(1.125rem, 2.4vw, 1.875rem);
+}
+
+/* The name is wiped in left to right behind a thin scan line. */
 .wordmark {
   position: relative;
   margin-right: -0.16em;
@@ -52,20 +58,50 @@
 }
 
 .cover-rule {
-  width: min(35rem, 62vw);
   height: 1px;
   background: var(--ink);
   animation: draw 1.1s var(--ease) 1s both;
 }
 
-.cover-place {
+/* What she does, the fields, and the city: three quiet lines. */
+.cover-lines {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  text-align: center;
   font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.cover-titles {
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  margin-right: -0.28em;
+  color: var(--ink);
+  animation: rise 1s var(--ease) 1.3s both;
+}
+
+.cover-slash,
+.cover-dot {
+  margin-inline: 0.9em 0.62em;
+  color: var(--ink-4);
+}
+
+.cover-fields {
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  margin-right: -0.28em;
+  color: var(--ink-3);
+  animation: rise 1s var(--ease) 1.42s both;
+}
+
+.cover-place {
+  margin-top: 0.75rem;
   font-size: 0.6875rem;
   letter-spacing: 0.32em;
   margin-right: -0.32em;
-  text-transform: uppercase;
   color: var(--ink-2);
-  animation: rise 1s var(--ease) 1.3s both;
+  animation: rise 1s var(--ease) 1.54s both;
 }
 
 .cover-foot {
@@ -124,17 +160,31 @@
 
 @media (max-width: 700px) {
   .wordmark {
-    display: grid;
-    justify-items: center;
-    gap: 0.35em;
-    font-size: 6vw;
-    letter-spacing: 0.16em;
-    margin-right: -0.16em;
+    font-size: 7.4vw;
   }
 
-  .wordmark span:first-child {
-    font-size: 2.6em;
-    letter-spacing: 0.12em;
+  .cover-titles {
+    display: grid;
+    gap: 0.5em;
+    font-size: 0.6875rem;
+  }
+
+  .cover-slash {
+    display: none;
+  }
+
+  /* Two lines on a phone: the last field drops below, without its dot. */
+  .cover-fields {
+    font-size: 0.625rem;
+    line-height: 2;
+  }
+
+  .cover-fields > span:last-child {
+    display: block;
+  }
+
+  .cover-fields > span:last-child .cover-dot {
+    display: none;
   }
 
   .cover-foot {
